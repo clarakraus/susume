@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class BlogServiceTest {
 
     @Test
-    void shouldCreateNewBog(){
+    void shouldCreateNewBlog(){
         BlogRepo testRepo = Mockito.mock(BlogRepo.class);
         Blog testBlog = new Blog(null, "testname", "testDescription", "LinkToPicture");
         BlogService testService = new BlogService(testRepo);

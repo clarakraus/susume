@@ -2,6 +2,8 @@
 import BlogComponent from "../components/BlogComponent";
 
 export default function Blog(){
+
+
     return(
         <>
             <div>

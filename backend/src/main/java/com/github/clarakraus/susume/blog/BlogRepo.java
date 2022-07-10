@@ -6,5 +6,5 @@ import java.util.Optional;
 
 public interface BlogRepo extends MongoRepository<Blog, String> {
 
-
+    Optional<Blog> findBlogByUsername(String username);
 }

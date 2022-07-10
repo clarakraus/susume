@@ -1,22 +1,20 @@
 import {useState} from "react";
-import {postProfile} from "../servive/BlogService";
+import {postProfile} from "../service/BlogService";
+import {useNavigate} from "react-router-dom";
 
 export default function CreateBlog(){
 
     const[username, setUsername] = useState("");
     const[profileDescription, setProfileDescription] = useState("");
     const[profilePicture, setProfilePicture] = useState("");
+    const nav = useNavigate();
 
 
 
     const createProfile = () => {
         postProfile(username, profileDescription, profilePicture)
-
-
-
-
+            .then(()=> nav("/profile/"+ username))
     }
-
 
     return(
         <>
