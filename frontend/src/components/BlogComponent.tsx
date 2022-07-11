@@ -6,7 +6,7 @@ import {Blog} from "../service/Model";
 export default function BlogComponent(){
 
     const {username} = useParams()
-    const [profileName, setProfileName] = useState("")
+    const [profileName, setProfileName] = useState(username)
     const [profilePicture, setProfilePicture] = useState("")
     const [profileDescription, setProfileDescription] = useState("")
     const [blogObject, setBlogObject] = useState({} as Blog)
@@ -21,7 +21,7 @@ export default function BlogComponent(){
                     setProfileDescription(blogObject.profileDescription)
                 })
         }
-    }, [username])
+    }, [profileName, profileDescription, profilePicture])
 
 
     return(
