@@ -31,7 +31,7 @@ export default function BlogComponent(){
                 {profileDescription}
             </div>
             <div>
-                <img src={profilePicture} alt="profile"/>
+                <img src={profilePicture} alt="profile avatar"/>
             </div>
         </>
     )
