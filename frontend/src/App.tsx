@@ -1,26 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import {BrowserRouter, Route, Routes} from "react-router-dom"
+import CreateBlog from "./pages/CreateBlog";
+import Blog from "./pages/Blog";
 
-function App() {
-
-    const [greeting, setGreeting] = useState('')
-
-    useEffect(() => {
-        fetch('/api/greeting', {
-            method: 'GET',
-            headers: {
-                'Accept': 'text/plain'
-            }
-        })
-            .then(response => response.text())
-            .then(text => setGreeting(text))
-            .catch(err => setGreeting('Da ist etwas schief gelaufen'));
-    }, []);
-
+export default function App() {
     return (
-        <div>
-            {greeting}
-        </div>
-    );
+        <BrowserRouter>
+            <Routes>
+                <Route path={"/"} element={<CreateBlog/>}/>
+                <Route path={"/profile/:username"} element={<Blog/>}/>
+            </Routes>
+        </BrowserRouter>
+    )
+
 }
 
-export default App;
+
