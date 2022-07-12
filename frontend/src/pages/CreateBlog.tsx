@@ -28,7 +28,7 @@ export default function CreateBlog(){
             </div>
 
             <div>
-                <input type="text" placeholder="upload your picture here" onChange={event => setProfilePicture(event.target.value)}/>
+                <input type="picture" placeholder="upload your picture here" onChange={event => setProfilePicture(event.target.value)}/>
             </div>
 
             <button onClick={createProfile}>create profile</button>
