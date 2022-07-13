@@ -10,9 +10,7 @@ import java.util.List;
 public class MovieApiService {
 
     private final MovieApiConnection movieApiConnection;
-    public List<MoviePreview> searchMovie(String query){
+    public List<Movie> searchMovie(String query){
         return movieApiConnection.getMovieFromTMDB(query);
-
-
     }
 }

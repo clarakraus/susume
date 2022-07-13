@@ -10,7 +10,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 
 @Service
@@ -29,14 +28,34 @@ public class MovieApiConnection {
         return header;
     }
 
-    public List<MoviePreview> getMovieFromTMDB(String query) {
-            ResponseEntity<MoviePreviewResults> results = restTemplate.exchange("https://api.themoviedb.org/3/search/movie?query=" + query,
+    public List<Movie> getMovieFromTMDB(String query) {
+            ResponseEntity<MovieResults> results = restTemplate.exchange("https://api.themoviedb.org/3/search/movie?query=" + query,
                     HttpMethod.GET,
                     new HttpEntity<>(createHeader(TMDB_TOKEN)),
-                    MoviePreviewResults.class);
+                    MovieResults.class);
                     return Objects.requireNonNull(results.getBody()).getResults();
 
     }
+    public Movie getMovieFromTMDBById(long id){
+        ResponseEntity<Movie> results = restTemplate.exchange("https://api.themoviedb.org/3/movie/" + id,
+                HttpMethod.GET,
+                new HttpEntity<>(createHeader(TMDB_TOKEN)),
+                Movie.class);
+        return Objects.requireNonNull(results.getBody());
 
+    }
+
+  /* Todo: finish this get-request to add provider information.
+
+   public List<ProviderDetails> getProviderDetails(long movieId, String country){
+        ResponseEntity<ProviderResponse> results = restTemplate.exchange("https://api.themoviedb.org/3/movie/" + movieId + "/watch/providers",
+                HttpMethod.GET,
+                new HttpEntity<>(createHeader(TMDB_TOKEN)),
+                ProviderResponse.class);
+
+                return Objects.requireNonNull(results.getBody().getResults().getDe());
+    }
+
+   */
 
 }

@@ -1,0 +1,18 @@
+.singleMovie{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 300px;
+    height: 450px;
+    background-color: rgba(225, 189, 24, 0.81);
+    margin: 2rem;
+    border-radius: 35px;
+    box-shadow: 5px 5px 30px #6464a2;
+}
+
+.scroller{
+    width: 250px;
+    height: 100px;
+    overflow-y: scroll;
+
+}

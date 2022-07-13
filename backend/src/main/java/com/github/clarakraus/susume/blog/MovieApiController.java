@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class MovieApiController {
 
 
     @GetMapping("/search/{query}")
-    public ResponseEntity<List<MoviePreview>> results(@PathVariable String query){
+    public ResponseEntity<List<Movie>> results(@PathVariable String query){
         try {
             return ResponseEntity.ok(movieApiService.searchMovie(query));
         }
@@ -25,7 +24,6 @@ public class MovieApiController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
-
 
 
 
