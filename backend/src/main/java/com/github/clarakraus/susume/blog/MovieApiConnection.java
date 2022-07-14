@@ -1,5 +1,6 @@
 package com.github.clarakraus.susume.blog;
 
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -15,8 +16,8 @@ import java.util.Objects;
 @Service
 public class MovieApiConnection {
 
-    private RestTemplate restTemplate;
-    private String TMDB_TOKEN;
+    private final RestTemplate restTemplate;
+    private final String TMDB_TOKEN;
 
     public MovieApiConnection(RestTemplate restTemplate, @Value("${moviedb.token}") String TMDB_TOKEN) {
         this.restTemplate = restTemplate;
