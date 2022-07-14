@@ -19,7 +19,7 @@ export default function AddPage(){
                .then(data => setMovieToAdd(data))
                .then(() => setId(movieId))
        }
-   }, [])
+   }, [movieId])
 
     const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setGenre(event.target.value);
