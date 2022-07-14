@@ -1,5 +1,6 @@
 
 import BlogComponent from "../components/BlogComponent";
+import MovieApiSearch from "../components/MovieApiSearch";
 
 export default function Blog(){
 
@@ -11,6 +12,9 @@ export default function Blog(){
             </div>
             <div>
                 <BlogComponent/>
+            </div>
+            <div>
+                <MovieApiSearch/>
             </div>
         </>
     )

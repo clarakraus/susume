@@ -1,25 +1,22 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {getProfileDetails} from "../service/BlogService";
-import {Blog} from "../service/Model";
 
 export default function BlogComponent(){
 
     const {username} = useParams()
     const [profilePicture, setProfilePicture] = useState("")
     const [profileDescription, setProfileDescription] = useState("")
-    const [blogObject, setBlogObject] = useState({} as Blog)
 
     useEffect(()=>{
         if (username){
             getProfileDetails(username)
-                .then(data => setBlogObject(data))
-                .then(() => {
-                    setProfilePicture(blogObject.profilePicture)
-                    setProfileDescription(blogObject.profileDescription)
+                .then(data => {
+                    setProfilePicture(data.profilePicture)
+                    setProfileDescription(data.profileDescription)
                 })
         }
-    }, [username, blogObject])
+    }, [username])
 
 
     return(

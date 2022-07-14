@@ -24,4 +24,8 @@ public class BlogController {
         return ResponseEntity.of(blogService.getBlogDetails(username));
 
     }
+    @GetMapping("/{username}/susumes")
+    public ResponseEntity<Susume[]> getAllSusumes(@PathVariable String username){
+        return null;
+    }
 }

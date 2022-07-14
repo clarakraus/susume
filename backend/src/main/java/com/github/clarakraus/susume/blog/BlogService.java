@@ -1,6 +1,8 @@
 package com.github.clarakraus.susume.blog;
 
 
+import com.github.clarakraus.susume.post.Category;
+import com.github.clarakraus.susume.post.Post;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
