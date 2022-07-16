@@ -21,7 +21,7 @@ export default function MovieField(props: MovieApiSearchProps){
             <div className={"singleMovie"}>
                 <p> {props.movie.original_title} </p>
                 <p className="scroller"> {props.movie.overview} </p>
-                <img src = {`https://image.tmdb.org/t/p/original/${props.movie.poster_path}`} width={120} alt="movie poster"/>
+                <img src = {`https://image.tmdb.org/t/p/original/${props.movie.poster_path}`} width={120} alt="movie poster"/>`
                 <p> {props.movie.release_date} </p>
             </div>
             <button onClick={goToSavePage}>

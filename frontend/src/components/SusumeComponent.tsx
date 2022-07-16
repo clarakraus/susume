@@ -23,7 +23,7 @@ export default function SusumeComponent(props: SusumeComponentProps){
                 {overview}
             </div>
             <div>
-                {picture}
+                <img src={`https://image.tmdb.org/t/p/original/${picture}`}width={120} alt="movie poster"/>
             </div>
             <div>
                 {category}
