@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from "axios";
-import {Blog, MoviePost, MoviePreview} from "./Model";
+import {Blog, MoviePost, MoviePreview, Susume} from "./Model";
 
 export function postProfile(username: string, profileDescription: string, profilePicture: string){
     return axios.post("/blog", {username, profileDescription, profilePicture})
@@ -19,4 +19,12 @@ export function searchTMDBForID(movieId: string){
 }
 export function postMovieToDB(movie: MoviePost){
     return axios.post("/postings/movie/new", movie)
+}
+export function getSusumes(){
+    return axios.get("/postings")
+        .then((response:AxiosResponse<Susume[]>)=> response.data)
+}
+export function searchFriend(friend: string){
+    return axios.get(`/blog/lookfor/${friend}`)
+        .then((response:AxiosResponse<Blog[]>)=> response.data)
 }

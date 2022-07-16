@@ -10,6 +10,8 @@ export default function AddPage(){
     const [id, setId] = useState("")
     const [homage, setHomage] = useState("")
     const [genre, setGenre] = useState("")
+    const [errorMessage, setErrorMessage] = useState("")
+
 
 
 
@@ -18,7 +20,10 @@ export default function AddPage(){
            searchTMDBForID(movieId)
                .then(data => setMovieToAdd(data))
                .then(() => setId(movieId))
+               .catch(() => setErrorMessage("We couldn't load your movie, oopsies!",
+                   ))
        }
+
    }, [movieId])
 
     const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -33,6 +38,8 @@ export default function AddPage(){
 
     return(
         <>
+
+            {errorMessage && <div>{errorMessage}</div>}
             <div>
                 <p> {movieToAdd.original_title} </p>
                 <p> {movieToAdd.overview} </p>
@@ -62,7 +69,6 @@ export default function AddPage(){
                     <option value="KIDS">kids</option>
                     <option value="CULT">cult</option>
                     <option value="ROMANTIC">romantic</option>
-
                 </select>
             </div>
             <div>

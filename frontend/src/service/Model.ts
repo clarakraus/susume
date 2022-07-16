@@ -19,3 +19,14 @@ export interface MoviePost{
     homage:string
     genre: string
 }
+
+export interface Susume{
+    category: string
+    id: string
+    title: string
+    overview: string
+    poster_path: string
+    homage: string
+    genre: string
+
+}

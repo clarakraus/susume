@@ -28,4 +28,9 @@ public class BlogController {
     public ResponseEntity<Susume[]> getAllSusumes(@PathVariable String username){
         return null;
     }
+
+    @GetMapping("/lookfor/{friend}")
+    public ResponseEntity<Blog> findFriend(@PathVariable String friend){
+        return ResponseEntity.of(blogService.getBlogDetails(friend));
+    }
 }
