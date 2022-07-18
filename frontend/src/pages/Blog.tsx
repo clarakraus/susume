@@ -1,6 +1,8 @@
 
 import BlogComponent from "../components/BlogComponent";
 import MovieApiSearch from "../components/MovieApiSearch";
+import SusumeGallery from "../components/SusumeGallery";
+
 
 export default function Blog(){
 
@@ -16,6 +18,10 @@ export default function Blog(){
             <div>
                 <MovieApiSearch/>
             </div>
+            <div>
+                <SusumeGallery/>
+            </div>
+
         </>
     )
 

@@ -2,10 +2,14 @@ package com.github.clarakraus.susume.post;
 
 
 import com.github.clarakraus.susume.blog.Movie;
+import com.github.clarakraus.susume.blog.Susume;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -21,8 +25,17 @@ public class PostController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
     @GetMapping("/movie/id/{movieId}")
-            public ResponseEntity<Movie> getMovie(@PathVariable long movieId) {
+    public ResponseEntity<Movie> getMovie(@PathVariable long movieId) {
+        try {
             return ResponseEntity.ok(postService.getMovieById(movieId));
+        } catch (NullPointerException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+    }
+    @GetMapping()
+    public ResponseEntity<List<Susume>> getSusume(){
+        return ResponseEntity.ok(postService.getAllSusumes());
 
     }
 

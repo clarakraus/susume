@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {getProfileDetails} from "../service/BlogService";
+import SearchFriends from "./SearchFriends";
 
 export default function BlogComponent(){
 
@@ -29,6 +30,9 @@ export default function BlogComponent(){
             </div>
             <div>
                 <img src={profilePicture} alt="profile avatar"/>
+            </div>
+            <div>
+                <SearchFriends/>
             </div>
         </>
     )

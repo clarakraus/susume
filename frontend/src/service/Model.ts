@@ -1,6 +1,6 @@
 
 export interface Blog{
-    profileName:string
+    username:string
     profileDescription: string
     profilePicture: string
 }
@@ -18,4 +18,15 @@ export interface MoviePost{
     id: string
     homage:string
     genre: string
+}
+
+export interface Susume{
+    category: string
+    id: string
+    title: string
+    overview: string
+    poster_path: string
+    homage: string
+    genre: string
+
 }

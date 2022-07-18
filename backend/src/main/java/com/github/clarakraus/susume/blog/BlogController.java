@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/blog")
@@ -28,4 +30,10 @@ public class BlogController {
     public ResponseEntity<Susume[]> getAllSusumes(@PathVariable String username){
         return null;
     }
+
+    @GetMapping("/lookfor/{friend}")
+    public List<Blog> findFriend(@PathVariable String friend){
+        return blogService.findUsers(friend);
+    }
+
 }
