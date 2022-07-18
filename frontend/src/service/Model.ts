@@ -1,6 +1,6 @@
 
 export interface Blog{
-    profileName:string
+    username:string
     profileDescription: string
     profilePicture: string
 }
