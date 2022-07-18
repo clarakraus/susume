@@ -8,6 +8,7 @@ export default function BlogComponent(){
     const {username} = useParams()
     const [profilePicture, setProfilePicture] = useState("")
     const [profileDescription, setProfileDescription] = useState("")
+    const [listOfFriends, setListOfFriends]= useState<Array<string>>([])
 
     useEffect(()=>{
         if (username){
@@ -15,6 +16,7 @@ export default function BlogComponent(){
                 .then(data => {
                     setProfilePicture(data.profilePicture)
                     setProfileDescription(data.profileDescription)
+                    setListOfFriends(data.friendsList)
                 })
         }
     }, [username])
@@ -33,6 +35,9 @@ export default function BlogComponent(){
             </div>
             <div>
                 <SearchFriends/>
+            </div>
+            <div>
+                friends {listOfFriends}
             </div>
         </>
     )

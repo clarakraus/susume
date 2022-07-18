@@ -28,3 +28,7 @@ export function searchFriend(friend: string){
     return axios.get(`/blog/lookfor/${friend}`)
         .then((response:AxiosResponse<Blog[]>)=> response.data)
 }
+
+export function addFriend(friendId: string,username: string){
+    axios.put(`/blog/${username}/addfriend/${friendId}`)
+}

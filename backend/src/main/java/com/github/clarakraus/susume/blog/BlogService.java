@@ -18,7 +18,6 @@ public class BlogService{
 
     public void createBlog(Blog blog) {
         blogRepo.save(blog);
-
     }
 
     public Optional<Blog> getBlogDetails(String username) {
@@ -29,6 +28,11 @@ public class BlogService{
         return blogRepo.findAllByUsernameContainingIgnoreCase(username);
     }
 
+    public void updateFriendList(String friendsId, String blogOwner){
+        Blog blogToUpdate = blogRepo.findBlogByUsername(blogOwner).orElseThrow();
+        blogToUpdate.addToFriendList(friendsId);
+        blogRepo.save(blogToUpdate);
+    }
 
 
 }

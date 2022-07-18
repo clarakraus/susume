@@ -36,4 +36,10 @@ public class BlogController {
         return blogService.findUsers(friend);
     }
 
+    @PutMapping("/{username}/addfriend/{friendId}")
+    public ResponseEntity<Void> addFriend(@PathVariable String friendId, @PathVariable String username){
+        blogService.updateFriendList(friendId, username);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
 }

@@ -1,8 +1,10 @@
 
 export interface Blog{
+    blogId: string
     username:string
     profileDescription: string
     profilePicture: string
+    friendsList: string[]
 }
 
 export interface MoviePreview{
@@ -11,7 +13,6 @@ export interface MoviePreview{
     overview:string
     poster_path:string
     release_date:string
-
 }
 
 export interface MoviePost{

@@ -1,5 +1,7 @@
 import {Blog} from "../service/Model";
 import "./FriendsPreview.css"
+import {useParams} from "react-router-dom";
+import {addFriend} from "../service/BlogService";
 
 interface FriendsPreviewProps{
     blog: Blog
@@ -8,10 +10,21 @@ interface FriendsPreviewProps{
 export default function FriendsPreview(props: FriendsPreviewProps){
     const friendsName = props.blog.username
     const friendsPicture = props.blog.profilePicture
+    const friendsId = props.blog.blogId
+    const friendsList = props.blog.friendsList
+    const {username} = useParams();
+
+    const addToFriendsList = () =>{
+        if(username) {
+            addFriend(friendsId, username)
+        }
+    }
+
 return (
         <div>
             <img className="profilePicture" src={friendsPicture} width={40} alt={"user avatar"}/>
             {friendsName}
+            <button onClick={addToFriendsList}>add as friend</button>
         </div>
     )
 
