@@ -35,4 +35,5 @@ public class BlogController {
     public List<Blog> findFriend(@PathVariable String friend){
         return blogService.findUsers(friend);
     }
+
 }

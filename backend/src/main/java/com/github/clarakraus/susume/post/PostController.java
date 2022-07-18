@@ -34,7 +34,7 @@ public class PostController {
 
     }
     @GetMapping()
-    public ResponseEntity<List<Susume>> getMovie(){
+    public ResponseEntity<List<Susume>> getSusume(){
         return ResponseEntity.ok(postService.getAllSusumes());
 
     }

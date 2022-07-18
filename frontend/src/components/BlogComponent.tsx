@@ -32,7 +32,7 @@ export default function BlogComponent(){
                 <img src={profilePicture} alt="profile avatar"/>
             </div>
             <div>
-                {SearchFriends()}
+                <SearchFriends/>
             </div>
         </>
     )

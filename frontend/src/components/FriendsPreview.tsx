@@ -1,4 +1,5 @@
 import {Blog} from "../service/Model";
+import "./FriendsPreview.css"
 
 interface FriendsPreviewProps{
     blog: Blog
@@ -9,7 +10,7 @@ export default function FriendsPreview(props: FriendsPreviewProps){
     const friendsPicture = props.blog.profilePicture
 return (
         <div>
-            <img src={friendsPicture} width={40} alt={"user avatar"}/>
+            <img className="profilePicture" src={friendsPicture} width={40} alt={"user avatar"}/>
             {friendsName}
         </div>
     )
