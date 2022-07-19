@@ -2,13 +2,15 @@ import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {getProfileDetails} from "../service/BlogService";
 import SearchFriends from "./SearchFriends";
+import FriendsPreview from "./FriendsPreview";
 
 export default function BlogComponent(){
 
     const {username} = useParams()
     const [profilePicture, setProfilePicture] = useState("")
     const [profileDescription, setProfileDescription] = useState("")
-    const [listOfFriends, setListOfFriends]= useState<Array<string>>([])
+    const [friendsArray, setFriendsArray]= useState<Array<string>>([])
+    const ListOfFriends = friendsArray.map(friend => <FriendsPreview blog={friend}/>)
 
     useEffect(()=>{
         if (username){

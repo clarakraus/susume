@@ -21,11 +21,16 @@ export default function FriendsPreview(props: FriendsPreviewProps){
     }
 
 return (
+    <>
         <div>
             <img className="profilePicture" src={friendsPicture} width={40} alt={"user avatar"}/>
             {friendsName}
             <button onClick={addToFriendsList}>add as friend</button>
         </div>
+        <div>
+            {friendsList}
+        </div>
+    </>
     )
 
 }

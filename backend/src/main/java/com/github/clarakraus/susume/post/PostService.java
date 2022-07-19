@@ -18,23 +18,25 @@ public class PostService {
     private final SusumeMapper susumeMapper;
 
     public void createPost(Post post) {
-        post.setCategory(Category.Movie);
-        postRepo.save(post);
-    }
+        List<Post> allPostings = postRepo.findAllByCategory(Category.Movie);
+        //ToDo: doesnt work yet, still adds movies multiple times
+        if(allPostings.stream().map(Post::getId).equals(post.getId())){
+            throw new RuntimeException("this movie ID is already in your susumes");
+        } else {
+            post.setCategory(Category.Movie);
+            postRepo.save(post);
+        }
+        }
 
     public Movie getMovieById(long movieId) {
         return movieApiConnection.getMovieFromTMDBById(movieId);
     }
     public List<Susume> getAllSusumes() {
         List<Post> allPostings = postRepo.findAll();
-        Susume susume = new Susume();
-       return allPostings.stream()
+        //ToDo: change image path to URL
+        return allPostings.stream()
+                .filter(post -> post.getCategory().equals(Category.Movie))
                 .map(post -> susumeMapper.map(getMovieById(post.getId()), post))
                 .toList();
     }
-
-
-
-
-
 }

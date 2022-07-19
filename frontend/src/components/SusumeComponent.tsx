@@ -1,15 +1,16 @@
-import {Susume} from "../service/Model";
+import {Content, Susume} from "../service/Model";
 import "./SusumeComponent.css"
 
 interface SusumeComponentProps{
     susume: Susume
+
 }
 
 export default function SusumeComponent(props: SusumeComponentProps){
     const category = props.susume.category
-    const title = props.susume.title
-    const picture= props.susume.poster_path
-    const overview =props.susume.overview
+    const title = props.susume.content.title
+    const picture= props.susume.content.poster_path
+    const overview =props.susume.content.overview
     const homage= props.susume.homage
     const genre= props.susume.genre
     return(
@@ -25,7 +26,7 @@ export default function SusumeComponent(props: SusumeComponentProps){
                     {overview}
                 </div>
                 <div>
-                    <img src={`https://image.tmdb.org/t/p/original/${picture}`}width={80} alt="movie poster"/>
+                    <img src={`https://image.tmdb.org/t/p/original/${picture}`} width={80} alt="movie poster"/>
                 </div>
                 <div>
                     {category}

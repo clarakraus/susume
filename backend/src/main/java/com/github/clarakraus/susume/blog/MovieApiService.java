@@ -13,4 +13,5 @@ public class MovieApiService {
     public List<Movie> searchMovie(String query){
         return movieApiConnection.getMovieFromTMDB(query);
     }
+
 }

@@ -25,10 +25,8 @@ public class Blog {
     private List<String> friendsList = new ArrayList<>();
 
 
-    public void addToFriendList(String blogId){
-        friendsList.add(blogId);
+    public void addToFriendList(String friendId){
+        if(friendsList.contains(friendId))
+        friendsList.add(friendId);
     }
-
-
-
 }

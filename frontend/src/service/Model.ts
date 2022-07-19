@@ -23,11 +23,15 @@ export interface MoviePost{
 
 export interface Susume{
     category: string
+    content: Content
     id: string
-    title: string
-    overview: string
     poster_path: string
     homage: string
     genre: string
 
+}
+export interface Content {
+    title: string
+    overview: string
+    poster_path: string
 }
