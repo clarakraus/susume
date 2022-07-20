@@ -11,7 +11,7 @@ export default function FriendsPreview(props: FriendsPreviewProps){
     const friendsName = props.blog.username
     const friendsPicture = props.blog.profilePicture
     const friendsId = props.blog.blogId
-    const friendsList = props.blog.friendsList
+//    const friendsList = props.blog.friendsList
     const {username} = useParams();
 
     const addToFriendsList = () =>{
@@ -19,16 +19,16 @@ export default function FriendsPreview(props: FriendsPreviewProps){
             addFriend(friendsId, username)
         }
     }
-
+    console.log(friendsPicture)
 return (
     <>
         <div>
-            <img className="profilePicture" src={friendsPicture} width={40} alt={"user avatar"}/>
+            <img className="profilePicture" src={props.blog.profilePicture} width={40} alt={"user avatar"}/>
             {friendsName}
             <button onClick={addToFriendsList}>add as friend</button>
         </div>
         <div>
-            {friendsList}
+
         </div>
     </>
     )

@@ -2,9 +2,9 @@
 export interface Blog{
     blogId: string
     username:string
-    profileDescription: string
+    profileDescription?: string
     profilePicture: string
-    friendsList: string[]
+    friendsList?: Array<string>
 }
 
 export interface MoviePreview{
@@ -34,4 +34,9 @@ export interface Content {
     title: string
     overview: string
     poster_path: string
+}
+export interface FriendItem{
+    username: string
+    profilePicture: string
+    blogId: string
 }

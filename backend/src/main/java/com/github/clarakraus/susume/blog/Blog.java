@@ -26,7 +26,9 @@ public class Blog {
 
 
     public void addToFriendList(String friendId){
-        if(friendsList.contains(friendId))
-        friendsList.add(friendId);
+        if(friendsList.contains(friendId)){
+            throw new IllegalStateException();
+        }
+            friendsList.add(friendId);
     }
 }

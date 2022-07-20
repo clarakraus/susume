@@ -6,7 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,11 +26,6 @@ public class BlogController {
     @GetMapping("/{username}")
     public ResponseEntity<Blog> getBlogDetails(@PathVariable String username){
         return ResponseEntity.of(blogService.getBlogDetails(username));
-
-    }
-    @GetMapping("/{username}/susumes")
-    public ResponseEntity<Susume[]> getAllSusumes(@PathVariable String username){
-        return null;
     }
 
     @GetMapping("/lookfor/{friend}")
@@ -40,6 +37,19 @@ public class BlogController {
     public ResponseEntity<Void> addFriend(@PathVariable String friendId, @PathVariable String username){
         blogService.updateFriendList(friendId, username);
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+    public FriendDTO FriendMapper(Blog blog){
+        FriendDTO friendDTO = new FriendDTO();
+        friendDTO.setUserId(blog.getBlogId());
+        friendDTO.setUsername(blog.getUsername());
+        friendDTO.setProfilePicture(blog.getProfilePicture());
+        return friendDTO;
+    }
+    @PostMapping("/friendlist")
+    public ResponseEntity<List<FriendDTO>> displayFriends(@RequestBody List<String> friendList){
+       List<Blog> blogList = friendList.stream().map(blogService::getUserById).toList();
+       List<FriendDTO> friendDTOList= blogList.stream().map(this::FriendMapper).toList();
+       return ResponseEntity.of(Optional.of(friendDTOList));
     }
 
 }
