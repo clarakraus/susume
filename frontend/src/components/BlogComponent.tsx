@@ -10,7 +10,6 @@ export default function BlogComponent(){
     const {username} = useParams()
     const [profilePicture, setProfilePicture] = useState("")
     const [profileDescription, setProfileDescription] = useState("")
-    const [friendsArray, setFriendsArray]= useState<Array<string>>([])
     const [friendList, setFriendList] = useState<Array<FriendItem>>([])
 
 
@@ -20,7 +19,6 @@ export default function BlogComponent(){
                 .then(data => {
                     setProfilePicture(data.profilePicture)
                     setProfileDescription(data.profileDescription!)
-                    setFriendsArray(data.friendsList!)
                     return data
                 })
 
