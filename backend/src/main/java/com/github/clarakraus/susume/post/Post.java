@@ -13,7 +13,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Post {
    @Id
    private String postId;
-
    private Category category;
    private Genre genre;
    private long id;

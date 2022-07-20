@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Movie {
+public class Movie implements Content {
     private long id;
     @JsonProperty("original_title")
     private String originalTitle;
@@ -18,4 +18,5 @@ public class Movie {
     private String posterPath;
     @JsonProperty("release_date")
     private String releaseDate;
+
 }

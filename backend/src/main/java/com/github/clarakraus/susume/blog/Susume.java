@@ -12,10 +12,7 @@ import lombok.NoArgsConstructor;
 
 public class Susume {
    private Category category;
-   private String title;
-
-   private String overview;
-   private String poster_path;
+   private Content content;
    private String homage;
    private Genre genre;
 }
