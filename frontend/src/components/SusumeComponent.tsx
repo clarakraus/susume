@@ -1,4 +1,4 @@
-import {Content, Susume} from "../service/Model";
+import {Susume} from "../service/Model";
 import "./SusumeComponent.css"
 
 interface SusumeComponentProps{
