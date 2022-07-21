@@ -12,6 +12,6 @@ public interface BlogRepo extends MongoRepository<Blog, String> {
 
     Optional<Blog> findBlogByBlogId(String blogId);
 
-    List<Blog> findAllByUsernameContainingIgnoreCase(String username);
+    Optional<List<Blog>> findAllByUsernameContainingIgnoreCase(String username);
 
 }

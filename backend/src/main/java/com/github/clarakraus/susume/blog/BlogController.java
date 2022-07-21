@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
@@ -24,32 +25,50 @@ public class BlogController {
         blogService.createBlog(blog);
     }
     @GetMapping("/{username}")
-    public ResponseEntity<Blog> getBlogDetails(@PathVariable String username){
-        return ResponseEntity.of(blogService.getBlogDetails(username));
+    public ResponseEntity<Blog> getBlogDetails(@PathVariable String username) {
+        try {
+            return ResponseEntity.of(blogService.getBlogDetails(username));
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
     }
 
     @GetMapping("/lookfor/{friend}")
-    public List<Blog> findFriend(@PathVariable String friend){
-        return blogService.findUsers(friend);
+    public List<Blog> findFriend(@PathVariable String friend) {
+        try {
+            return blogService.findUsers(friend).orElseThrow();
+        } catch (NoSuchElementException e) {
+
+            return null;
+                    //ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+
+        }
     }
+
 
     @PutMapping("/{username}/addfriend/{friendId}")
     public ResponseEntity<Void> addFriend(@PathVariable String friendId, @PathVariable String username){
         blogService.updateFriendList(friendId, username);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
-    public FriendDTO FriendMapper(Blog blog){
-        FriendDTO friendDTO = new FriendDTO();
-        friendDTO.setUserId(blog.getBlogId());
-        friendDTO.setUsername(blog.getUsername());
-        friendDTO.setProfilePicture(blog.getProfilePicture());
-        return friendDTO;
-    }
-    @PostMapping("/friendlist")
-    public ResponseEntity<List<FriendDTO>> displayFriends(@RequestBody List<String> friendList){
-       List<Blog> blogList = friendList.stream().map(blogService::getUserById).toList();
-       List<FriendDTO> friendDTOList= blogList.stream().map(this::FriendMapper).toList();
-       return ResponseEntity.of(Optional.of(friendDTOList));
-    }
 
+    @PostMapping("/friendlist")
+    public ResponseEntity<List<FriendDTO>> displayFriends(@RequestBody List<String> friendList) {
+        try {
+            List<FriendDTO> friendDTOList = friendList.stream()
+                    .map(blogService::getUserById)
+                    .map(user -> {
+                        FriendDTO friendDTO = new FriendDTO();
+                        friendDTO.setUsername(user.getUsername());
+                        friendDTO.setUserId(user.getBlogId());
+                        friendDTO.setProfilePicture(user.getProfilePicture());
+                        return friendDTO;
+                    })
+                    .toList();
+            return ResponseEntity.of(Optional.of(friendDTOList));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
 }

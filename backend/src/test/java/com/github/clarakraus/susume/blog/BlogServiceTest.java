@@ -33,5 +33,18 @@ class BlogServiceTest {
 
 
     }
+   /* @Test
+    void shouldReturnBlogByUserId(){
+        BlogRepo testRepo = Mockito.mock(BlogRepo.class);
+        BlogService testService = new BlogService(testRepo);
+        Blog testBlog = new Blog("testId", "testname", "testDescription", "LinkToPicture", List.of("friend1", "friend2"));
+       // Mockito.when(testRepo.findBlogByUsername("testId")).thenReturn(Optional.of(testBlog));
+        testService.getUserById("testId");
+        Mockito.verify(testRepo).findBlogByBlogId("testId");
+      //  org.assertj.core.api.Assertions.assertThat(testService.getUserById("testId")).isEqualTo(Optional.of(testBlog));
+
+    }
+
+    */
 
 }
