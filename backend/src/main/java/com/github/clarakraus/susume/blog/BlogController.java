@@ -27,22 +27,18 @@ public class BlogController {
     @GetMapping("/{username}")
     public ResponseEntity<Blog> getBlogDetails(@PathVariable String username) {
         try {
-            return ResponseEntity.of(blogService.getBlogDetails(username));
+            return ResponseEntity.ok(blogService.getBlogDetails(username));
         } catch (NoSuchElementException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-
     }
 
     @GetMapping("/lookfor/{friend}")
-    public List<Blog> findFriend(@PathVariable String friend) {
+    public ResponseEntity<List<Blog>> findFriend(@PathVariable String friend) {
         try {
-            return blogService.findUsers(friend).orElseThrow();
+            return ResponseEntity.ok(blogService.findUsers(friend));
         } catch (NoSuchElementException e) {
-
-            return null;
-                    //ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 
@@ -66,7 +62,7 @@ public class BlogController {
                         return friendDTO;
                     })
                     .toList();
-            return ResponseEntity.of(Optional.of(friendDTOList));
+            return ResponseEntity.ok(friendDTOList);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
