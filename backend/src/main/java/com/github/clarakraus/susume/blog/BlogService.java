@@ -7,10 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -26,7 +23,8 @@ public class BlogService{
         return blogRepo.findBlogByBlogId(id).orElseThrow();
     }
     public Optional<Blog> getBlogDetails(String username) {
-        return blogRepo.findBlogByUsername(username);
+           return blogRepo.findBlogByUsername(username);
+
      /*   List<Blog> friends = blogOwner.getFriendsList().stream().map(userId-> getUserById(userId)).toList();
         ArrayList<List<Blog>> blogArrayList = new ArrayList<>();
         blogArrayList.add(blogOwner);
@@ -35,7 +33,7 @@ public class BlogService{
       */
     }
 
-    public List<Blog> findUsers(String username){
+    public Optional<List<Blog>> findUsers(String username){
         return blogRepo.findAllByUsernameContainingIgnoreCase(username);
     }
 
