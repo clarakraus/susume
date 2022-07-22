@@ -25,18 +25,34 @@ public class BlogController {
         blogService.createBlog(blog);
     }
     @GetMapping("/{username}")
-    public ResponseEntity<Blog> getBlogDetails(@PathVariable String username) {
+    public ResponseEntity<BlogDTO> getBlogDetails(@PathVariable String username) {
         try {
-            return ResponseEntity.ok(blogService.getBlogDetails(username));
+            Blog blog = (blogService.getBlogDetails(username));
+            BlogDTO blogDTO =  new BlogDTO();
+            blogDTO.setBlogId(blog.getBlogId());
+            blogDTO.setUsername(blog.getUsername());
+            blogDTO.setProfilePicture(blog.getProfilePicture());
+            blogDTO.setProfileDescription(blog.getProfileDescription());
+            blogDTO.setFriendsList(blog.getFriendsList());
+            blogDTO.setSavedSusumes(blog.getSavedSusumes());
+            return ResponseEntity.ok(blogDTO);
         } catch (NoSuchElementException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 
     @GetMapping("/lookfor/{friend}")
-    public ResponseEntity<List<Blog>> findFriend(@PathVariable String friend) {
+    public ResponseEntity<List<BlogDTO>> findFriend(@PathVariable String friend) {
         try {
-            return ResponseEntity.ok(blogService.findUsers(friend));
+            List<Blog> friendBlogs = blogService.findUsers(friend);
+           List<BlogDTO> friendBlogDTO = friendBlogs.stream().map(blog ->{
+                BlogDTO blogDTO =  new BlogDTO();
+                blogDTO.setBlogId(blog.getBlogId());
+                blogDTO.setUsername(blog.getUsername());
+                blogDTO.setProfilePicture(blog.getProfilePicture());
+                return blogDTO;
+            }).toList();
+           return ResponseEntity.ok(friendBlogDTO);
         } catch (NoSuchElementException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
