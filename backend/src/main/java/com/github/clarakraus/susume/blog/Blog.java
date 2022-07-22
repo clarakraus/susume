@@ -22,6 +22,7 @@ public class Blog {
     private String username;
     private String profileDescription;
     private String profilePicture;
+    private List <String> savedSusumes = new ArrayList<>();
     private List<String> friendsList = new ArrayList<>();
 
 
@@ -30,5 +31,11 @@ public class Blog {
             throw new IllegalStateException();
         }
             friendsList.add(friendId);
+    }
+    public void addToFavorites(String susumeId){
+        if(savedSusumes.contains(susumeId)){
+            throw new IllegalStateException();
+        }
+        savedSusumes.add(susumeId);
     }
 }

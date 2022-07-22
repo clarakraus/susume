@@ -1,6 +1,6 @@
 import {MoviePreview} from "../service/Model";
 import "./MovieField.css"
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 interface MovieApiSearchProps{
     movie: MoviePreview
@@ -10,9 +10,10 @@ export default function MovieField(props: MovieApiSearchProps){
 
     const movieId = props.movie.id
     const nav = useNavigate()
+    const {blogname} = useParams()
 
     const goToSavePage = () =>{
-        nav("/addnew/" + movieId)
+        nav(blogname + "/addnew/" + movieId)
     }
 
     return(

@@ -8,7 +8,7 @@ export interface Blog{
 }
 
 export interface MoviePreview{
-    original_title:string
+    original_title?:string
     id: number
     overview:string
     poster_path:string
@@ -19,6 +19,7 @@ export interface MoviePost{
     id: string
     homage:string
     genre: string
+    creater: string
 }
 
 export interface Susume{
@@ -28,8 +29,9 @@ export interface Susume{
     poster_path: string
     homage: string
     genre: string
-
+    creater: string
 }
+
 export interface Content {
     title: string
     overview: string

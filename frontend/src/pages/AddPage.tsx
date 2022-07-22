@@ -5,11 +5,12 @@ import {MoviePreview} from "../service/Model";
 
 export default function AddPage(){
     const {movieId} = useParams()
-
+    const {blogname} = useParams()
     const [movieToAdd, setMovieToAdd] = useState({} as MoviePreview)
     const [id, setId] = useState("")
     const [homage, setHomage] = useState("")
     const [genre, setGenre] = useState("")
+    const creater = blogname
     const [errorMessage, setErrorMessage] = useState("")
 
 
@@ -32,13 +33,13 @@ export default function AddPage(){
 
 
     const postMovie = () =>{
-        postMovieToDB({id, homage, genre})
+        if(creater){
+        postMovieToDB({id, homage, genre, creater})}
     }
 
 
     return(
         <>
-
             {errorMessage && <div>{errorMessage}</div>}
             <div>
                 <p> {movieToAdd.original_title} </p>
