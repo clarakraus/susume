@@ -19,8 +19,9 @@ public class PostController {
 
     private final PostService postService;
 
-    @PostMapping("/movie/new")
-    public ResponseEntity<Void> postMovie(@RequestBody Post post){
+    @PostMapping("/movie/new/{username}")
+    public ResponseEntity<Void> postMovie(@RequestBody Post post, @PathVariable String username){
+        post.setCreater(username);
         postService.createPost(post);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -34,9 +35,13 @@ public class PostController {
 
     }
     @GetMapping()
-    public ResponseEntity<List<Susume>> getSusume(){
+    public ResponseEntity<List<Susume>> getAllSusumes(){
         return ResponseEntity.ok(postService.getAllSusumes());
 
+    }
+    @PostMapping("/watchlist/display")
+    public ResponseEntity<List<Susume>> displaySusumesOnProfile(@RequestBody List<String> favoritesList){
+      return ResponseEntity.ok(postService.displaySusumesOnProfile(favoritesList));
     }
 
 

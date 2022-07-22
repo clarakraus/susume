@@ -67,4 +67,11 @@ public class BlogController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+
+    //Todo: finish
+    @PutMapping("/watchlist")
+    public ResponseEntity<Void> addToFavorites(@PathVariable String susumeId, @PathVariable String username){
+        blogService.addToFavorites(susumeId, username);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }

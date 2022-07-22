@@ -40,7 +40,6 @@ export default function AddPage(){
 
     return(
         <>
-
             {errorMessage && <div>{errorMessage}</div>}
             <div>
                 <p> {movieToAdd.original_title} </p>

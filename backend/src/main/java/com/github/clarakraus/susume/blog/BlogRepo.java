@@ -1,5 +1,6 @@
 package com.github.clarakraus.susume.blog;
 
+import com.github.clarakraus.susume.post.Post;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
@@ -13,5 +14,4 @@ public interface BlogRepo extends MongoRepository<Blog, String> {
     Optional<Blog> findBlogByBlogId(String blogId);
 
     Optional<List<Blog>> findAllByUsernameContainingIgnoreCase(String username);
-
 }

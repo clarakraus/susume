@@ -15,4 +15,5 @@ public class Susume {
    private Content content;
    private String homage;
    private Genre genre;
+   private String creater;
 }

@@ -17,5 +17,6 @@ public class Post {
    private Genre genre;
    private long id;
    private String homage;
+   private String creater;
 
 }

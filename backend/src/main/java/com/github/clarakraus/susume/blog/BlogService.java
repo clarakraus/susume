@@ -43,6 +43,13 @@ public class BlogService{
         blogRepo.save(blogToUpdate);
     }
 
+    public void addToFavorites(String susumeId, String username){
+        Blog blogToUpdate = blogRepo.findBlogByUsername(username).orElseThrow();
+        blogToUpdate.addToFavorites(susumeId);
+        blogRepo.save(blogToUpdate);
+    }
+
+
 
 
 }

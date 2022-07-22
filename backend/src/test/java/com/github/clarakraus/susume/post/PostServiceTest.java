@@ -1,7 +1,4 @@
 package com.github.clarakraus.susume.post;
-
-
-import com.github.clarakraus.susume.blog.Content;
 import com.github.clarakraus.susume.blog.Movie;
 import com.github.clarakraus.susume.blog.MovieApiConnection;
 import com.github.clarakraus.susume.blog.Susume;
@@ -40,8 +37,8 @@ class PostServiceTest {
         Movie movieInPost1 = new Movie(12345, "originalTitle1", "title1","overview1", "poster1", "releaseDate1" );
         Movie movieInPost2 = new Movie(6789, "originalTitle2", "title2","overview2", "poster2", "releaseDate2" );
 
-        Susume susu1 = new Susume(Category.Movie , movieInPost1, "testHomage1",Genre.COMEDY);
-        Susume susu2 = new Susume(Category.Movie , movieInPost2, "testHomage2",Genre.ACTION);
+        Susume susu1 = new Susume(Category.Movie, movieInPost1, "testHomage1", Genre.COMEDY);
+        Susume susu2 = new Susume(Category.Movie, movieInPost2, "testHomage2", Genre.ACTION);
 
         PostService testPostService = new PostService(testPostRepo, testConnection, susumap);
 

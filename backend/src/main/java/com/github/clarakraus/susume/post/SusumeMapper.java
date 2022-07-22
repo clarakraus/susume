@@ -11,6 +11,6 @@ import java.util.List;
 public class SusumeMapper {
 
     Susume map(Content content, Post post){
-        return new Susume(post.getCategory(),content, post.getHomage(), post.getGenre());
+        return new Susume(post.getCategory(),content, post.getHomage(), post.getGenre(), post.getCreater());
     }
 }
