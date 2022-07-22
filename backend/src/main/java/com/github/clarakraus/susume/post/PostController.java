@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 
@@ -19,9 +20,9 @@ public class PostController {
 
     private final PostService postService;
 
-    @PostMapping("/movie/new/{username}")
-    public ResponseEntity<Void> postMovie(@RequestBody Post post, @PathVariable String username){
-        post.setCreater(username);
+    @PostMapping("/movie/new")
+    public ResponseEntity<Void> postMovie(@RequestBody Post post, Principal principal){
+        post.setCreater(principal.getName());
         postService.createPost(post);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -35,8 +36,8 @@ public class PostController {
 
     }
     @GetMapping()
-    public ResponseEntity<List<Susume>> getAllSusumes(){
-        return ResponseEntity.ok(postService.getAllSusumes());
+    public ResponseEntity<List<Susume>> getAllSusumes(Principal principal){
+        return ResponseEntity.ok(postService.getAllSusumes(principal.getName()));
 
     }
     @PostMapping("/watchlist/display")

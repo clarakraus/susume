@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -60,8 +61,8 @@ public class BlogController {
 
 
     @PutMapping("/{username}/addfriend/{friendId}")
-    public ResponseEntity<Void> addFriend(@PathVariable String friendId, @PathVariable String username){
-        blogService.updateFriendList(friendId, username);
+    public ResponseEntity<Void> addFriend(@PathVariable String friendId, Principal principal){
+        blogService.updateFriendList(friendId, principal.getName());
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
@@ -86,8 +87,8 @@ public class BlogController {
 
     //Todo: finish
     @PutMapping("/watchlist")
-    public ResponseEntity<Void> addToFavorites(@PathVariable String susumeId, @PathVariable String username){
-        blogService.addToFavorites(susumeId, username);
+    public ResponseEntity<Void> addToFavorites(@PathVariable String susumeId, Principal principal){
+        blogService.addToFavorites(susumeId, principal.getName());
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

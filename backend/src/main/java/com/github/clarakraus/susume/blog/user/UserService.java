@@ -3,6 +3,8 @@ package com.github.clarakraus.susume.blog.user;
 import com.github.clarakraus.susume.blog.Blog;
 import com.github.clarakraus.susume.blog.BlogRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,6 +12,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UserService {
+
+    private final PasswordEncoder passwordEncoder;
     private final BlogRepo blogRepo;
 
     public void createAccount(Blog newAccount) {
@@ -17,7 +21,9 @@ public class UserService {
         if (allBlogs.stream().anyMatch(blog -> blog.getUsername() == newAccount.getUsername())) {
             throw new RuntimeException("username is already taken");
         }
-            blogRepo.save(newAccount);
+        String encodedPassword = passwordEncoder.encode(newAccount.getPassword());
+        newAccount.setPassword(encodedPassword);
+        blogRepo.save(newAccount);
         }
 
         public Blog getUser(String username){

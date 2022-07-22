@@ -10,8 +10,7 @@ public interface BlogRepo extends MongoRepository<Blog, String> {
 
     Optional<Blog> findBlogByUsername(String username);
 
-
-    Optional<Blog> findBlogByBlogId(String blogId);
+   Optional <Blog> findBlogByBlogId(String blogId);
 
     Optional<List<Blog>> findAllByUsernameContainingIgnoreCase(String username);
 

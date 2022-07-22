@@ -33,7 +33,7 @@ public class PostService {
     public Movie getMovieById(long movieId) {
         return movieApiConnection.getMovieFromTMDBById(movieId);
     }
-    public List<Susume> getAllSusumes() {
+    public List<Susume> getAllSusumes(String username) {
         List<Post> allPostings = postRepo.findAll();
         //ToDo: change image path to URL
         return allPostings.stream()
