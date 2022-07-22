@@ -10,7 +10,7 @@ export default function App() {
             <Routes>
                 <Route path={"/"} element={<CreateBlog/>}/>
                 <Route path={"/profile/:username"} element={<Blog/>}/>
-                <Route path={"/addnew/:movieId"} element={<AddPage/>}/>
+                <Route path={"profile/:blogname/addnew/:movieId"} element={<AddPage/>}/>
             </Routes>
         </BrowserRouter>
     )

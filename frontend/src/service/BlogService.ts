@@ -18,7 +18,7 @@ export function searchTMDBForID(movieId: string){
         .then((response:AxiosResponse<MoviePreview>) => response.data)
 }
 export function postMovieToDB(movie: MoviePost){
-    return axios.post("/postings/movie/new", movie)
+    return axios.post("/postings/movie/new/{username}", movie)
 }
 export function getSusumes(){
     return axios.get("/postings")
@@ -32,6 +32,7 @@ export function searchFriend(friend: string){
 export function addFriend(friendId: string,username: string){
     axios.put(`/blog/${username}/addfriend/${friendId}`)
 }
+
 export function sendFriendsList(friendsList: Array<string>){
     return axios.post(`/blog/friendlist`, friendsList )
         .then((response: AxiosResponse<FriendItem[]>)=> response.data)
