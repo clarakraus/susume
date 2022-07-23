@@ -16,7 +16,7 @@ import java.util.NoSuchElementException;
 public class UserController {
      private final UserService userService;
 
-     @PostMapping("/createaccount")
+     @PostMapping("/register")
      public ResponseEntity<Void> createAccount(@RequestBody Blog newAccount) {
           try {
                userService.createAccount(newAccount);
