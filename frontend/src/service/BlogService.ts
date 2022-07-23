@@ -5,8 +5,12 @@ export function postProfile(registerDetails: RegisterDetails){
     return axios.post("/user/register", registerDetails)
     }
 
-export function getProfileDetails(username:string){
-    return axios.get(`/blog/${username}`)
+export function getProfileDetails(){
+    return axios.get(`/blog/details`, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('jwt')}`
+        }
+    })
         .then((response:AxiosResponse<Blog>) => response.data)
 }
 export function searchTMDB(movieTitle: string){
@@ -21,7 +25,11 @@ export function postMovieToDB(movie: MoviePost){
     return axios.post("/postings/movie/new/{username}", movie)
 }
 export function getSusumes(){
-    return axios.get("/postings")
+    return axios.get("/postings", {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('jwt')}`
+            }
+            })
         .then((response:AxiosResponse<Susume[]>)=> response.data)
 }
 export function searchFriend(friend: string){
@@ -38,6 +46,6 @@ export function sendFriendsList(friendsList: Array<string>){
         .then((response: AxiosResponse<FriendItem[]>)=> response.data)
 }
 export const loginUser = (loginData: LoginData) => {
-    return axios.post('/api/auth/login', loginData)
+    return axios.post('/api/login', loginData)
         .then((response: AxiosResponse<LoginResponse>) => response.data)
 }

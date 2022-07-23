@@ -15,7 +15,7 @@ export default function BlogComponent(){
 
     useEffect(()=>{
         if (username){
-            getProfileDetails(username)
+            getProfileDetails()
                 .then(data => {
                     setProfilePicture(data.profilePicture)
                     setProfileDescription(data.profileDescription!)

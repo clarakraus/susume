@@ -27,10 +27,10 @@ public class BlogController {
     }
 
    */
-    @GetMapping("/{username}")
-    public ResponseEntity<BlogDTO> getBlogDetails(@PathVariable String username) {
+    @GetMapping("/details")
+    public ResponseEntity<BlogDTO> getBlogDetails(Principal principal) {
         try {
-            Blog blog = (blogService.getBlogDetails(username));
+            Blog blog = (blogService.getBlogDetails(principal.getName()));
             BlogDTO blogDTO =  new BlogDTO();
             blogDTO.setBlogId(blog.getBlogId());
             blogDTO.setUsername(blog.getUsername());
