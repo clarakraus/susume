@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 
 @RestController
-@RequestMapping("/login")
+@RequestMapping("api/login")
 @RequiredArgsConstructor
 public class LoginController {
 

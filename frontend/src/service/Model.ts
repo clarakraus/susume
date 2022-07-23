@@ -42,3 +42,17 @@ export interface FriendItem{
     profilePicture: string
     blogId: string
 }
+export interface RegisterDetails {
+    username: string
+    password: string
+    passwordRepeat: string
+    profileDescription?: string
+    profilePicture: string
+}
+export interface LoginData {
+    username: string
+    password: string
+}
+export interface LoginResponse {
+    jwt: string
+}

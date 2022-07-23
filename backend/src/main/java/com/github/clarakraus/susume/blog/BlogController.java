@@ -20,11 +20,13 @@ import java.util.Optional;
 public class BlogController {
     private final BlogService blogService;
 
-    @ResponseStatus(HttpStatus.CREATED)
+   /* @ResponseStatus(HttpStatus.CREATED)
     @PostMapping()
     public void createBlog(@RequestBody Blog blog){
         blogService.createBlog(blog);
     }
+
+   */
     @GetMapping("/{username}")
     public ResponseEntity<BlogDTO> getBlogDetails(@PathVariable String username) {
         try {

@@ -16,9 +16,11 @@ public class BlogService{
     private final BlogRepo blogRepo;
 
 
-    public void createBlog(Blog blog) {
+  /*  public void createBlog(Blog blog) {
         blogRepo.save(blog);
     }
+
+   */
     public Blog getUserById(String id){
         return blogRepo.findBlogByBlogId(id).orElseThrow();
     }

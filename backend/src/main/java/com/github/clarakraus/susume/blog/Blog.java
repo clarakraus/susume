@@ -27,6 +27,8 @@ public class Blog {
 
     private String password;
 
+    private String passwordRepeat;
+
 
     public void addToFriendList(String friendId){
         if(friendsList.contains(friendId)){

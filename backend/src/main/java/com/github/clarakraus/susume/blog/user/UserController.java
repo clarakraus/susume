@@ -13,13 +13,14 @@ import java.util.NoSuchElementException;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
+@CrossOrigin
 public class UserController {
      private final UserService userService;
 
      @PostMapping("/register")
-     public ResponseEntity<Void> createAccount(@RequestBody Blog newAccount) {
+     public ResponseEntity<Void> createAccount(@RequestBody RegisterDetails registerData) {
           try {
-               userService.createAccount(newAccount);
+               userService.createAccount(registerData);
                return ResponseEntity.status(HttpStatus.CREATED).build();
           } catch (RuntimeException e) {
                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
