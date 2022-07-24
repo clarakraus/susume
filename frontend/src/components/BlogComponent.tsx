@@ -2,8 +2,8 @@ import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {getProfileDetails, sendFriendsList} from "../service/BlogService";
 import SearchFriends from "./SearchFriends";
-import FriendsPreview from "./FriendsPreview";
 import {FriendItem} from "../service/Model";
+import FriendComponent from "./FriendComponent";
 
 export default function BlogComponent(){
 
@@ -30,8 +30,8 @@ export default function BlogComponent(){
 
 
 
-    const ListOfFriends = friendList.map(friend => <FriendsPreview blog={{username:friend.username, profilePicture:friend.profilePicture, blogId: friend.blogId}}/>)
-    console.log(friendList)
+    const ListOfFriends = friendList.map(friend => <FriendComponent friendItem={{username:friend.username, profilePicture:friend.profilePicture, blogId: friend.blogId}}/>)
+
 
    /* useEffect(() =>{
         if(friendList.length > 0){

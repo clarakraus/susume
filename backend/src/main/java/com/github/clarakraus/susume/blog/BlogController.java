@@ -43,17 +43,33 @@ public class BlogController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+    @GetMapping("/getfriendblog/{username}")
+    public ResponseEntity<BlogDTO> getBlogDetails(@PathVariable String username) {
+        try {
+            Blog blog = (blogService.getBlogDetails(username));
+            BlogDTO blogDTO =  new BlogDTO();
+            blogDTO.setBlogId(blog.getBlogId());
+            blogDTO.setUsername(blog.getUsername());
+            blogDTO.setProfilePicture(blog.getProfilePicture());
+            blogDTO.setProfileDescription(blog.getProfileDescription());
+            blogDTO.setFriendsList(blog.getFriendsList());
+            return ResponseEntity.ok(blogDTO);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
 
     @GetMapping("/lookfor/{friend}")
-    public ResponseEntity<List<BlogDTO>> findFriend(@PathVariable String friend) {
+    public ResponseEntity<List<FriendDTO>> findFriend(@PathVariable String friend) {
         try {
             List<Blog> friendBlogs = blogService.findUsers(friend);
-           List<BlogDTO> friendBlogDTO = friendBlogs.stream().map(blog ->{
-                BlogDTO blogDTO =  new BlogDTO();
-                blogDTO.setBlogId(blog.getBlogId());
-                blogDTO.setUsername(blog.getUsername());
-                blogDTO.setProfilePicture(blog.getProfilePicture());
-                return blogDTO;
+            List<FriendDTO> friendBlogDTO = friendBlogs.stream().map(blog ->{
+                FriendDTO friendDTO =  new FriendDTO();
+                friendDTO.setBlogId(blog.getBlogId());
+                friendDTO.setUsername(blog.getUsername());
+                friendDTO.setProfilePicture(blog.getProfilePicture());
+                return friendDTO;
             }).toList();
            return ResponseEntity.ok(friendBlogDTO);
         } catch (NoSuchElementException e) {
@@ -62,7 +78,7 @@ public class BlogController {
     }
 
 
-    @PutMapping("/{username}/addfriend/{friendId}")
+    @PutMapping("/addfriend/{friendId}")
     public ResponseEntity<Void> addFriend(@PathVariable String friendId, Principal principal){
         blogService.updateFriendList(friendId, principal.getName());
         return ResponseEntity.status(HttpStatus.OK).build();
@@ -76,7 +92,7 @@ public class BlogController {
                     .map(user -> {
                         FriendDTO friendDTO = new FriendDTO();
                         friendDTO.setUsername(user.getUsername());
-                        friendDTO.setUserId(user.getBlogId());
+                        friendDTO.setBlogId(user.getBlogId());
                         friendDTO.setProfilePicture(user.getProfilePicture());
                         return friendDTO;
                     })

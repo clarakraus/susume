@@ -10,10 +10,11 @@ export default function MovieField(props: MovieApiSearchProps){
 
     const movieId = props.movie.id
     const nav = useNavigate()
-    const {blogname} = useParams()
+    const {username} = useParams()
 
     const goToSavePage = () =>{
-        nav(blogname + "/addnew/" + movieId)
+        nav(`/profile/${username}/addnew/${movieId}`)
+  //      nav(username + "/addnew/" + movieId)
     }
 
     return(

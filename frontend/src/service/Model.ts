@@ -19,7 +19,6 @@ export interface MoviePost{
     id: string
     homage:string
     genre: string
-    creater: string
 }
 
 export interface Susume{

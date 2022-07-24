@@ -29,12 +29,11 @@ public class PostService {
         }
     }
 
-
     public Movie getMovieById(long movieId) {
         return movieApiConnection.getMovieFromTMDBById(movieId);
     }
     public List<Susume> getAllSusumes(String username) {
-        List<Post> allPostings = postRepo.findAll();
+        List<Post> allPostings = postRepo.findAllByCreater(username);
         //ToDo: change image path to URL
         return allPostings.stream()
                 .filter(post -> post.getCategory().equals(Category.Movie))
