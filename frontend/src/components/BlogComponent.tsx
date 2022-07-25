@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {getFriendBlogDetails, getProfileDetails, sendFriendsList} from "../service/BlogService";
-import SearchFriends from "./SearchFriends";git
+import SearchFriends from "./SearchFriends";
 import {FriendItem} from "../service/Model";
 import FriendComponent from "./FriendComponent";
 
