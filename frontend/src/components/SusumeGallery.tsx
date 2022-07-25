@@ -24,7 +24,7 @@ export default function SusumeGallery(props: SusumeCreatorProps){
                 .then((data)=>setSusumeArray(data))
                 .catch(() => setError('susumes could no not be loaded'))
         }
-    }, [])
+    }, [props.creatorName])
 
     return (
         <>
