@@ -1,4 +1,3 @@
-import {Interface} from "readline";
 import {FriendItem} from "../service/Model";
 import {NavLink} from "react-router-dom";
 

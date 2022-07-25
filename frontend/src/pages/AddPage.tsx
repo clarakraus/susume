@@ -5,7 +5,7 @@ import {MoviePreview} from "../service/Model";
 
 export default function AddPage(){
     const {movieId} = useParams()
-    const {username} = useParams()
+ //   const {username} = useParams()
     const nav = useNavigate()
 
     const [movieToAdd, setMovieToAdd] = useState({} as MoviePreview)

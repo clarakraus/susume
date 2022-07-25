@@ -1,10 +1,9 @@
 import {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {getFriendBlogDetails, getProfileDetails, sendFriendsList} from "../service/BlogService";
-import SearchFriends from "./SearchFriends";
+import SearchFriends from "./SearchFriends";git
 import {FriendItem} from "../service/Model";
 import FriendComponent from "./FriendComponent";
-import {AxiosError} from "axios";
 
 interface BlogNameProps{
     blogName: string
@@ -16,7 +15,7 @@ export default function BlogComponent(props: BlogNameProps){
     const [profilePicture, setProfilePicture] = useState("")
     const [profileDescription, setProfileDescription] = useState("")
     const [friendList, setFriendList] = useState<Array<FriendItem>>([])
-    const nav = useNavigate()
+  //  const nav = useNavigate()
  //   const [errorCode, setErrorCode] = useState("")
 
 
@@ -47,6 +46,10 @@ export default function BlogComponent(props: BlogNameProps){
                     setProfileDescription(data.profileDescription!)
                     return data
             })
+                .then((data) => {
+                    sendFriendsList(data.friendsList!)
+                        .then(data => setFriendList(data))
+                })
         }
 
     }, [props.blogName])
