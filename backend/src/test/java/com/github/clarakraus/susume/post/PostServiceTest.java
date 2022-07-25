@@ -42,7 +42,7 @@ class PostServiceTest {
 
         PostService testPostService = new PostService(testPostRepo, testConnection, susumap);
 
-        Mockito.when(testPostRepo.findAll()).thenReturn(postListFromRepo);
+        Mockito.when(testPostRepo.findAllByCreater("creator1")).thenReturn(postListFromRepo);
         Mockito.when(testConnection.getMovieFromTMDBById(12345)).thenReturn(movieInPost1);
         Mockito.when(testConnection.getMovieFromTMDBById(6789)).thenReturn(movieInPost2);
 

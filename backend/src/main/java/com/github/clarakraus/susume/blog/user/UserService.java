@@ -30,8 +30,6 @@ public class UserService {
             throw new IllegalArgumentException("password is blank");
         }
 
-
-
         List<Blog> allBlogs = blogRepo.findAll();
         if (allBlogs.stream().anyMatch(blog -> blog.getUsername() == registerDetails.getUsername())) {
             throw new RuntimeException("username is already taken");
@@ -45,7 +43,6 @@ public class UserService {
         newBlog.setProfilePicture(registerDetails.getProfilePicture());
         blogRepo.save(newBlog);
         }
-
         public Blog getUser(String username){
             return blogRepo.findBlogByUsername(username).orElseThrow();
         }
