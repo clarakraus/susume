@@ -52,7 +52,7 @@ export default function BlogComponent(props: BlogNameProps){
                 })
         }
 
-    }, [props.blogName])
+    }, [username])
 
 
 
