@@ -10,8 +10,8 @@ export default function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path={"/"} element={<CreateBlog/>}/>
-                <Route path={"/login"} element={<LoginPage/>}/>
+                <Route path={"/"} element={<LoginPage/>}/>
+                <Route path={"/register"} element={<CreateBlog/>}/>
                 <Route path={"/profile/:username"} element={<Blog/>}/>
                 <Route path={"/friend/:username"} element={<FriendPage/>}/>
                 <Route path={"profile/:username/addnew/:movieId"} element={<AddPage/>}/>

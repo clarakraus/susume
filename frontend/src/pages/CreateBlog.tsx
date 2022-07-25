@@ -17,7 +17,7 @@ export default function CreateBlog(){
     const createProfile = () => {
         if(username) {
             postProfile({username, password, passwordRepeat, profileDescription, profilePicture})
-                .then(() => nav("/login"))
+                .then(() => nav("/"))
    //             .then(() => nav("/profile/" + username))
         } else {
             setMessage("please enter a username")
