@@ -1,20 +1,27 @@
 import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
-import {getProfileDetails, sendFriendsList} from "../service/BlogService";
+import {useNavigate, useParams} from "react-router-dom";
+import {getFriendBlogDetails, getProfileDetails, sendFriendsList} from "../service/BlogService";
 import SearchFriends from "./SearchFriends";
 import {FriendItem} from "../service/Model";
 import FriendComponent from "./FriendComponent";
+import {AxiosError} from "axios";
 
-export default function BlogComponent(){
+interface BlogNameProps{
+    blogName: string
+}
+
+export default function BlogComponent(props: BlogNameProps){
 
     const {username} = useParams()
     const [profilePicture, setProfilePicture] = useState("")
     const [profileDescription, setProfileDescription] = useState("")
     const [friendList, setFriendList] = useState<Array<FriendItem>>([])
+    const nav = useNavigate()
+ //   const [errorCode, setErrorCode] = useState("")
 
 
     useEffect(()=>{
-        if (username){
+        if (!username){
             getProfileDetails()
                 .then(data => {
                     setProfilePicture(data.profilePicture)
@@ -22,10 +29,27 @@ export default function BlogComponent(){
                     return data
                 })
 
-                .then((data) => sendFriendsList(data.friendsList!)
-                    .then(data => setFriendList(data)))
+                .then((data) => {
+                    sendFriendsList(data.friendsList!)
+                        .then(data => setFriendList(data))
+                })
+ /*              .catch((e) => {
+                    if(e.status === 403){
+                        nav("/")
+                    }
+                })
+  */
         }
-    }, [username])
+        else {
+            getFriendBlogDetails(username!)
+                .then(data => {
+                    setProfilePicture(data.profilePicture)
+                    setProfileDescription(data.profileDescription!)
+                    return data
+            })
+        }
+
+    }, [props.blogName])
 
 
 
@@ -46,7 +70,7 @@ export default function BlogComponent(){
     return(
         <>
             <div>
-                {username}
+                {props.blogName}
             </div>
             <div>
                 {profileDescription}

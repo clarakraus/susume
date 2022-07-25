@@ -3,6 +3,7 @@ import {getFriendBlogDetails, getSusumes, getSusumesForFriendBlog} from "../serv
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {FriendItem} from "../service/Model";
+import SusumeGallery from "../components/SusumeGallery";
 
 export default function FriendPage(){
 
@@ -28,8 +29,13 @@ export default function FriendPage(){
 
 
     return(
-        <div>
-            <BlogComponent/>
-        </div>
+        <>
+            <div>
+                <BlogComponent blogName={username!}/>
+            </div>
+            <div>
+                <SusumeGallery creatorName={username!}/>
+            </div>
+        </>
     )
 }

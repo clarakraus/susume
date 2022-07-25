@@ -11,7 +11,7 @@ export default function AddPage(){
     const [movieToAdd, setMovieToAdd] = useState({} as MoviePreview)
     const [id, setId] = useState("")
     const [homage, setHomage] = useState("")
-    const [genre, setGenre] = useState("")
+    const [genre, setGenre] = useState("NO_GENRE")
     const [errorMessage, setErrorMessage] = useState("")
 
 
@@ -37,7 +37,7 @@ export default function AddPage(){
     const postMovie = () =>{
 
         postMovieToDB({id, homage, genre})
-            .then(() => nav(`/profile/${username}`))
+            .then(() => nav(`/profile`))
     }
 
 

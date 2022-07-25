@@ -54,7 +54,7 @@ export function getSusumes(){
 }
 
 export function getSusumesForFriendBlog(username:string){
-    return axios.get(`postings/getfriendblog/${username}`, {
+    return axios.get(`/postings/friends/${username}`, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem('jwt')}`
         }

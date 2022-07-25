@@ -13,7 +13,7 @@ export default function LoginPage(){
         ev.preventDefault()
         loginUser({username, password})
             .then(loginResponse => localStorage.setItem('jwt', loginResponse.jwt))
-            .then(() => nav(`/profile/${username}`))
+            .then(() => nav(`/profile`))
             .catch(() => setErrorMessage('Login failed'))
     }
 

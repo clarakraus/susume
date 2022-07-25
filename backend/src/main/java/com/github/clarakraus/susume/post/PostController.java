@@ -23,7 +23,7 @@ public class PostController {
     @PostMapping("/movie/new")
     public ResponseEntity<Void> postMovie(@RequestBody Post post, Principal principal){
         post.setCreater(principal.getName());
-        postService.createPost(post);
+        postService.createPost(post, principal.getName());
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
     @GetMapping("/movie/id/{movieId}")
@@ -40,10 +40,13 @@ public class PostController {
         return ResponseEntity.ok(postService.getAllSusumes(principal.getName()));
 
     }
+    @GetMapping("/friends/{friendName}")
+    public ResponseEntity<List<Susume>> getFriendsSusumes(@PathVariable String friendName){
+        return ResponseEntity.ok(postService.getAllSusumes(friendName));
+
+    }
     @PostMapping("/watchlist/display")
     public ResponseEntity<List<Susume>> displaySusumesOnProfile(@RequestBody List<String> favoritesList){
       return ResponseEntity.ok(postService.displaySusumesOnProfile(favoritesList));
     }
-
-
 }

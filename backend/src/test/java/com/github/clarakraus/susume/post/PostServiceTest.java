@@ -18,7 +18,7 @@ class PostServiceTest {
 
         PostService testPostService = new PostService(testPostRepo, null, null);
         Post testPost = new Post("postId", Category.Movie, Genre.HORROR, 1234, "such a cool movie!", "creator" );
-        testPostService.createPost(testPost);
+        testPostService.createPost(testPost, "creator");
         Mockito.verify(testPostRepo).save(testPost);
     }
     @Test

@@ -19,8 +19,8 @@ public class PostService {
 
     private final SusumeMapper susumeMapper;
 
-    public void createPost(Post post) {
-        List<Post> allPostings = postRepo.findAllByCategory(Category.Movie);
+    public void createPost(Post post, String creator) {
+        List<Post> allPostings = postRepo.findAllByCategoryAndCreater(Category.Movie, creator);
         if(allPostings.stream().anyMatch(post1 -> post1.getId() == post.getId())){
             throw new RuntimeException("this movie ID is already in your susumes");
         } else {

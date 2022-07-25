@@ -12,9 +12,9 @@ export default function App() {
             <Routes>
                 <Route path={"/"} element={<LoginPage/>}/>
                 <Route path={"/register"} element={<CreateBlog/>}/>
-                <Route path={"/profile/:username"} element={<Blog/>}/>
-                <Route path={"/friend/:username"} element={<FriendPage/>}/>
-                <Route path={"profile/:username/addnew/:movieId"} element={<AddPage/>}/>
+                <Route path={"/profile"} element={<Blog/>}/>
+                <Route path={"/profile/:username"} element={<FriendPage/>}/>
+                <Route path={"/profile/addnew/:movieId"} element={<AddPage/>}/>
             </Routes>
         </BrowserRouter>
     )
