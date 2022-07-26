@@ -33,20 +33,20 @@ export default function FriendPage(){
                     }
                 })
         }
-    })
+    }, [username])
     const ListOfFriends = friendList.map(friend => <FriendComponent friendItem={{username:friend.username, profilePicture:friend.profilePicture, blogId: friend.blogId}}/>)
 
 
     return(
         <>
             <div>
-                <BlogComponent username={username!} profileDescription={profileDescription}  profilePicture={profilePicture} friendsList={friendList}/>
+                <BlogComponent username={username!} profileDescription={profileDescription}  profilePicture={profilePicture}/>
             </div>
             <div>
                 {ListOfFriends}
             </div>
             <div>
-                <SusumeGallery creatorName={username!}/>
+                <SusumeGallery addToSaveList={true} creatorName={username!}/>
             </div>
         </>
     )

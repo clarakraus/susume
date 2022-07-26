@@ -9,7 +9,7 @@ interface BlogProps{
     username: string
     profilePicture: string
     profileDescription: string
-    friendsList: Array<FriendItem>
+ //   friendsList: Array<FriendItem>
 
 }
 
@@ -17,7 +17,7 @@ export default function BlogComponent(props: BlogProps){
     const username = props.username
     const picture = props.profilePicture
     const description = props.profileDescription
-    const friendlist = props.friendsList
+  //  const friendlist = props.friendsList
  //   const [errorCode, setErrorCode] = useState("")
 
 

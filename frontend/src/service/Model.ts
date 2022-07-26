@@ -24,7 +24,7 @@ export interface MoviePost{
 export interface Susume{
     category: string
     content: Content
-    id: string
+    postId: string
     poster_path: string
     homage: string
     genre: string

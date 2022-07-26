@@ -1,18 +1,25 @@
 import {Susume} from "../service/Model";
 import "./SusumeComponent.css"
+import {addToSaveList} from "../service/BlogService";
 
-interface SusumeComponentProps{
+interface SusumeGalleryProps{
     susume: Susume
+    addToSaveList: boolean
 
 }
 
-export default function SusumeComponent(props: SusumeComponentProps){
+export default function SusumeComponent(props: SusumeGalleryProps){
     const category = props.susume.category
     const title = props.susume.content.title
     const picture= props.susume.content.poster_path
     const overview =props.susume.content.overview
     const homage= props.susume.homage
     const genre= props.susume.genre
+    const susumeId = props.susume.postId
+
+    const saveSusume = () => {
+      addToSaveList(susumeId)
+    }
     return(
         <>
            <div className={"singleSusume"}>
@@ -37,6 +44,10 @@ export default function SusumeComponent(props: SusumeComponentProps){
                 <div>
                     {genre}
                 </div>
+               {props.addToSaveList && <div>
+                    <button onClick={saveSusume}>add to favorites</button>
+                </div>}
+
            </div>
 
         </>

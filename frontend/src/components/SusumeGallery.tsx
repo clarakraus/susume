@@ -3,16 +3,17 @@ import {getSusumes, getSusumesForFriendBlog} from "../service/BlogService";
 import SusumeComponent from "./SusumeComponent";
 import {Susume} from "../service/Model";
 
-interface SusumeCreatorProps{
+interface BlogProps{
     creatorName: string
+    addToSaveList: boolean
 }
 
 
-export default function SusumeGallery(props: SusumeCreatorProps){
+export default function SusumeGallery(props: BlogProps){
 
     const [error, setError] = useState("")
     const [susumeArray, setSusumeArray] = useState<Array<Susume>>([])
-    const susumeList = susumeArray.map(susume =><SusumeComponent susume={susume} />)
+    const susumeList = susumeArray.map(susume =><SusumeComponent addToSaveList={props.addToSaveList} susume={susume} />)
 
     useEffect(() =>{
         if(!props.creatorName) {

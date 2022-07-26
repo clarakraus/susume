@@ -104,7 +104,7 @@ public class BlogController {
     }
 
     //Todo: finish
-    @PutMapping("/watchlist")
+    @PutMapping("/collection/save/{susumeId}")
     public ResponseEntity<Void> addToFavorites(@PathVariable String susumeId, Principal principal){
         blogService.addToFavorites(susumeId, principal.getName());
         return ResponseEntity.status(HttpStatus.OK).build();

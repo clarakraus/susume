@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class Susume {
+   private String postId;
    private Category category;
    private Content content;
    private String homage;

@@ -76,13 +76,13 @@ export default function Blog(){
                 <header/>
             </div>
             <div>
-                <BlogComponent username={username!} profilePicture={profilePicture} profileDescription={profileDescription} friendsList={friendList}/>
+                <BlogComponent username={username!} profilePicture={profilePicture} profileDescription={profileDescription} />
             </div>
             <div>
                 <MovieApiSearch/>
             </div>
             <div>
-                <SusumeGallery creatorName={username!}/>
+                <SusumeGallery  addToSaveList={false} creatorName={username!}/>
             </div>
             <div>
                 <SearchFriends renderBlog={renderBlogComponent}/>

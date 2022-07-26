@@ -86,7 +86,15 @@ export function sendFriendsList(friendsList: Array<string>){
     } )
         .then((response: AxiosResponse<FriendItem[]>)=> response.data)
 }
-export const loginUser = (loginData: LoginData) => {
+export function loginUser(loginData: LoginData){
     return axios.post('/api/login', loginData)
         .then((response: AxiosResponse<LoginResponse>) => response.data)
+}
+
+export function addToSaveList(susumeId: string){
+    return axios.put(`/blog/collection/save/${susumeId}`, {},{
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('jwt')}`
+        }
+    })
 }
