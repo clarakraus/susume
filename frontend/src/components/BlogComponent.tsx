@@ -5,11 +5,11 @@ import SearchFriends from "./SearchFriends";
 import {FriendItem} from "../service/Model";
 import FriendComponent from "./FriendComponent";
 
-interface BlogNameProps{
-    blogName: string
-}
+//interface BlogNameProps{
+//    blogName: string
+//}
 
-export default function BlogComponent(props: BlogNameProps){
+export default function BlogComponent(){
 
     const {username} = useParams()
     const [profilePicture, setProfilePicture] = useState("")
@@ -18,41 +18,45 @@ export default function BlogComponent(props: BlogNameProps){
     const nav = useNavigate()
  //   const [errorCode, setErrorCode] = useState("")
 
+function renderBlogComponent() {
+    if (!username){
+        getProfileDetails()
+            .then(data => {
+                setProfilePicture(data.profilePicture)
+                setProfileDescription(data.profileDescription!)
+                return data
+            })
+
+            .then((data) => {
+                sendFriendsList(data.friendsList!)
+                    .then(data => setFriendList(data))
+            })
+            .catch((e) => {
+                if(e.response.status === 403){
+                    nav("/")
+                }
+            })
+
+    }
+    else {
+        getFriendBlogDetails(username!)
+            .then(data => {
+                setProfilePicture(data.profilePicture)
+                setProfileDescription(data.profileDescription!)
+                return data
+            })
+            .then((data) => {
+                sendFriendsList(data.friendsList!)
+                    .then(data => setFriendList(data))
+            })
+    }
+
+
+}
 
     useEffect(()=>{
-        if (!username){
-            getProfileDetails()
-                .then(data => {
-                    setProfilePicture(data.profilePicture)
-                    setProfileDescription(data.profileDescription!)
-                    return data
-                })
-
-                .then((data) => {
-                    sendFriendsList(data.friendsList!)
-                        .then(data => setFriendList(data))
-                })
-               .catch((e) => {
-                    if(e.response.status === 403){
-                        nav("/")
-                    }
-                })
-
-        }
-        else {
-            getFriendBlogDetails(username!)
-                .then(data => {
-                    setProfilePicture(data.profilePicture)
-                    setProfileDescription(data.profileDescription!)
-                    return data
-            })
-                .then((data) => {
-                    sendFriendsList(data.friendsList!)
-                        .then(data => setFriendList(data))
-                })
-        }
-
-    }, [username, nav])
+        renderBlogComponent()
+    }, [])
 
 
 
@@ -73,7 +77,7 @@ export default function BlogComponent(props: BlogNameProps){
     return(
         <>
             <div>
-                {props.blogName}
+                {username}
             </div>
             <div>
                 {profileDescription}
@@ -82,7 +86,7 @@ export default function BlogComponent(props: BlogNameProps){
                 <img src={profilePicture} alt="profile avatar"/>
             </div>
             <div>
-                <SearchFriends/>
+                <SearchFriends renderBlog={renderBlogComponent}/>
             </div>
             <div>
                 friends {ListOfFriends}

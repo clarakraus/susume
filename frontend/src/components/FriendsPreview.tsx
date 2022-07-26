@@ -1,20 +1,25 @@
 import {Blog} from "../service/Model";
 import "./FriendsPreview.css"
-import {addFriend, getProfileDetails} from "../service/BlogService";
+import {addFriend} from "../service/BlogService";
+import {useNavigate} from "react-router-dom";
 
 interface FriendsPreviewProps{
     blog: Blog
+    renderBlog: Function
+    setFriendsName: Function
 }
 
 export default function FriendsPreview(props: FriendsPreviewProps){
     const friendsName = props.blog.username
     const friendsPicture = props.blog.profilePicture
     const friendsId = props.blog.blogId
-
+    const nav = useNavigate()
 
     const addToFriendsList = () =>{
             addFriend(friendsId)
-                .then(()=> getProfileDetails())
+                .then(() => props.renderBlog())
+                .then(() => props.setFriendsName(""))
+                .then(() => nav("/profile"))
     }
 return (
     <>

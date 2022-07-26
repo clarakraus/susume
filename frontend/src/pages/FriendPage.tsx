@@ -9,7 +9,7 @@ export default function FriendPage(){
     return(
         <>
             <div>
-                <BlogComponent blogName={username!}/>
+                <BlogComponent/>
             </div>
             <div>
                 <SusumeGallery creatorName={username!}/>
