@@ -3,12 +3,12 @@ import {searchFriend} from "../service/BlogService";
 import {FriendItem} from "../service/Model";
 import FriendsPreview from "./FriendsPreview";
 
-interface BlogComponentProps{
+interface BlogProps{
     renderBlog: Function
 }
 
 
-export default function SearchFriends(props: BlogComponentProps){
+export default function SearchFriends(props: BlogProps){
     const[friendsName, setFriendsName] = useState("")
     const[message, setMessage] = useState("")
     const [friendArray, setFriendArray] = useState<Array<FriendItem>>([])

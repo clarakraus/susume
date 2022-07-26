@@ -1,67 +1,25 @@
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {getFriendBlogDetails, getProfileDetails, sendFriendsList} from "../service/BlogService";
 import SearchFriends from "./SearchFriends";
 import {FriendItem} from "../service/Model";
 import FriendComponent from "./FriendComponent";
 
-//interface BlogNameProps{
-//    blogName: string
-//}
-
-export default function BlogComponent(){
-
-    const {username} = useParams()
-    const [profilePicture, setProfilePicture] = useState("")
-    const [profileDescription, setProfileDescription] = useState("")
-    const [friendList, setFriendList] = useState<Array<FriendItem>>([])
-    const nav = useNavigate()
- //   const [errorCode, setErrorCode] = useState("")
-
-function renderBlogComponent() {
-    if (!username){
-        getProfileDetails()
-            .then(data => {
-                setProfilePicture(data.profilePicture)
-                setProfileDescription(data.profileDescription!)
-                return data
-            })
-
-            .then((data) => {
-                sendFriendsList(data.friendsList!)
-                    .then(data => setFriendList(data))
-            })
-            .catch((e) => {
-                if(e.response.status === 403){
-                    nav("/")
-                }
-            })
-
-    }
-    else {
-        getFriendBlogDetails(username!)
-            .then(data => {
-                setProfilePicture(data.profilePicture)
-                setProfileDescription(data.profileDescription!)
-                return data
-            })
-            .then((data) => {
-                sendFriendsList(data.friendsList!)
-                    .then(data => setFriendList(data))
-            })
-    }
-
+interface BlogProps{
+    username: string
+    profilePicture: string
+    profileDescription: string
+    friendsList: Array<FriendItem>
 
 }
 
-    useEffect(()=>{
-        renderBlogComponent()
-    }, [renderBlogComponent])
+export default function BlogComponent(props: BlogProps){
+    const username = props.username
+    const picture = props.profilePicture
+    const description = props.profileDescription
+    const friendlist = props.friendsList
+ //   const [errorCode, setErrorCode] = useState("")
 
-
-
-
-    const ListOfFriends = friendList.map(friend => <FriendComponent friendItem={{username:friend.username, profilePicture:friend.profilePicture, blogId: friend.blogId}}/>)
 
 
    /* useEffect(() =>{
@@ -80,17 +38,12 @@ function renderBlogComponent() {
                 {username}
             </div>
             <div>
-                {profileDescription}
+                {description}
             </div>
             <div>
-                <img src={profilePicture} alt="profile avatar"/>
+                <img src={picture} alt="profile avatar"/>
             </div>
-            <div>
-                <SearchFriends renderBlog={renderBlogComponent}/>
-            </div>
-            <div>
-                friends {ListOfFriends}
-            </div>
+
         </>
     )
 }
