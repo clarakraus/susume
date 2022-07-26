@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -19,33 +20,67 @@ import java.util.Optional;
 public class BlogController {
     private final BlogService blogService;
 
-    @ResponseStatus(HttpStatus.CREATED)
+   /* @ResponseStatus(HttpStatus.CREATED)
     @PostMapping()
     public void createBlog(@RequestBody Blog blog){
         blogService.createBlog(blog);
     }
-    @GetMapping("/{username}")
-    public ResponseEntity<Blog> getBlogDetails(@PathVariable String username) {
+
+   */
+    @GetMapping("/details")
+    public ResponseEntity<BlogDTO> getBlogDetails(Principal principal) {
         try {
-            return ResponseEntity.ok(blogService.getBlogDetails(username));
+            Blog blog = (blogService.getBlogDetails(principal.getName()));
+            BlogDTO blogDTO =  new BlogDTO();
+            blogDTO.setBlogId(blog.getBlogId());
+            blogDTO.setUsername(blog.getUsername());
+            blogDTO.setProfilePicture(blog.getProfilePicture());
+            blogDTO.setProfileDescription(blog.getProfileDescription());
+            blogDTO.setFriendsList(blog.getFriendsList());
+            blogDTO.setSavedSusumes(blog.getSavedSusumes());
+            return ResponseEntity.ok(blogDTO);
         } catch (NoSuchElementException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+    @GetMapping("/getfriendblog/{username}")
+    public ResponseEntity<BlogDTO> getBlogDetails(@PathVariable String username) {
+        try {
+            Blog blog = (blogService.getBlogDetails(username));
+            BlogDTO blogDTO =  new BlogDTO();
+            blogDTO.setBlogId(blog.getBlogId());
+            blogDTO.setUsername(blog.getUsername());
+            blogDTO.setProfilePicture(blog.getProfilePicture());
+            blogDTO.setProfileDescription(blog.getProfileDescription());
+            blogDTO.setFriendsList(blog.getFriendsList());
+            return ResponseEntity.ok(blogDTO);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
 
     @GetMapping("/lookfor/{friend}")
-    public ResponseEntity<List<Blog>> findFriend(@PathVariable String friend) {
+    public ResponseEntity<List<FriendDTO>> findFriend(@PathVariable String friend) {
         try {
-            return ResponseEntity.ok(blogService.findUsers(friend));
+            List<Blog> friendBlogs = blogService.findUsers(friend);
+            List<FriendDTO> friendBlogDTO = friendBlogs.stream().map(blog ->{
+                FriendDTO friendDTO =  new FriendDTO();
+                friendDTO.setBlogId(blog.getBlogId());
+                friendDTO.setUsername(blog.getUsername());
+                friendDTO.setProfilePicture(blog.getProfilePicture());
+                return friendDTO;
+            }).toList();
+           return ResponseEntity.ok(friendBlogDTO);
         } catch (NoSuchElementException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 
 
-    @PutMapping("/{username}/addfriend/{friendId}")
-    public ResponseEntity<Void> addFriend(@PathVariable String friendId, @PathVariable String username){
-        blogService.updateFriendList(friendId, username);
+    @PutMapping("/addfriend/{friendId}")
+    public ResponseEntity<Void> addFriend(@PathVariable String friendId, Principal principal){
+        blogService.updateFriendList(friendId, principal.getName());
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
@@ -57,7 +92,7 @@ public class BlogController {
                     .map(user -> {
                         FriendDTO friendDTO = new FriendDTO();
                         friendDTO.setUsername(user.getUsername());
-                        friendDTO.setUserId(user.getBlogId());
+                        friendDTO.setBlogId(user.getBlogId());
                         friendDTO.setProfilePicture(user.getProfilePicture());
                         return friendDTO;
                     })
@@ -70,8 +105,8 @@ public class BlogController {
 
     //Todo: finish
     @PutMapping("/watchlist")
-    public ResponseEntity<Void> addToFavorites(@PathVariable String susumeId, @PathVariable String username){
-        blogService.addToFavorites(susumeId, username);
+    public ResponseEntity<Void> addToFavorites(@PathVariable String susumeId, Principal principal){
+        blogService.addToFavorites(susumeId, principal.getName());
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

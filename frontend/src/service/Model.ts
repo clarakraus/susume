@@ -19,7 +19,6 @@ export interface MoviePost{
     id: string
     homage:string
     genre: string
-    creater: string
 }
 
 export interface Susume{
@@ -41,4 +40,18 @@ export interface FriendItem{
     username: string
     profilePicture: string
     blogId: string
+}
+export interface RegisterDetails {
+    username: string
+    password: string
+    passwordRepeat: string
+    profileDescription?: string
+    profilePicture: string
+}
+export interface LoginData {
+    username: string
+    password: string
+}
+export interface LoginResponse {
+    jwt: string
 }

@@ -25,6 +25,10 @@ public class Blog {
     private List <String> savedSusumes = new ArrayList<>();
     private List<String> friendsList = new ArrayList<>();
 
+    private String password;
+
+    private String passwordRepeat;
+
 
     public void addToFriendList(String friendId){
         if(friendsList.contains(friendId)){

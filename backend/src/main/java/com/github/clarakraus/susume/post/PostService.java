@@ -19,8 +19,8 @@ public class PostService {
 
     private final SusumeMapper susumeMapper;
 
-    public void createPost(Post post) {
-        List<Post> allPostings = postRepo.findAllByCategory(Category.Movie);
+    public void createPost(Post post, String creator) {
+        List<Post> allPostings = postRepo.findAllByCategoryAndCreater(Category.Movie, creator);
         if(allPostings.stream().anyMatch(post1 -> post1.getId() == post.getId())){
             throw new RuntimeException("this movie ID is already in your susumes");
         } else {
@@ -29,12 +29,11 @@ public class PostService {
         }
     }
 
-
     public Movie getMovieById(long movieId) {
         return movieApiConnection.getMovieFromTMDBById(movieId);
     }
-    public List<Susume> getAllSusumes() {
-        List<Post> allPostings = postRepo.findAll();
+    public List<Susume> getAllSusumes(String username) {
+        List<Post> allPostings = postRepo.findAllByCreater(username);
         //ToDo: change image path to URL
         return allPostings.stream()
                 .filter(post -> post.getCategory().equals(Category.Movie))

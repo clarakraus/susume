@@ -14,22 +14,11 @@ import static org.junit.jupiter.api.Assertions.fail;
 class BlogServiceTest {
 
     @Test
-    void shouldCreateNewBlog(){
-        BlogRepo testRepo = Mockito.mock(BlogRepo.class);
-        Blog testBlog = new Blog(null, "testname", "testDescription", "LinkToPicture", List.of("friend1", "friend2"), List.of("postId"));
-        BlogService testService = new BlogService(testRepo);
-
-        testService.createBlog(testBlog);
-
-        Mockito.verify(testRepo).save(testBlog);
-
-    }
-    @Test
     void shouldReturnBlogFromDB(){
         BlogRepo testRepo = Mockito.mock(BlogRepo.class);
         BlogService testService = new BlogService(testRepo);
 
-        Blog testBlog = new Blog(null, "testname", "testDescription", "LinkToPicture", List.of("friend1", "friend2"), List.of("testId"));
+        Blog testBlog = new Blog(null, "testname", "testDescription", "LinkToPicture", List.of("friend1", "friend2"), List.of("testId"), "password", "password");
         Mockito.when(testRepo.findBlogByUsername("testname")).thenReturn(Optional.of(testBlog));
 
         Assertions.assertThat(testService.getBlogDetails("testname")).isEqualTo(testBlog);
@@ -38,7 +27,7 @@ class BlogServiceTest {
     void shouldThrowNSEEInsteadOfBlogByUserName(){
         BlogRepo testRepo = Mockito.mock(BlogRepo.class);
         BlogService testService = new BlogService(testRepo);
-        Blog testBlog = new Blog(null, "testname", "testDescription", "LinkToPicture", List.of("friend1", "friend2"), List.of("postId"));
+        Blog testBlog = new Blog(null, "testname", "testDescription", "LinkToPicture", List.of("friend1", "friend2"), List.of("postId"), "password", "password");
         Mockito.when(testRepo.findBlogByUsername("testname")).thenReturn(Optional.of(testBlog));
         try{
             testService.getBlogDetails("WrongName");
@@ -54,7 +43,7 @@ class BlogServiceTest {
     void shouldReturnBlogByUserId(){
         BlogRepo testRepo = Mockito.mock(BlogRepo.class);
         BlogService testService = new BlogService(testRepo);
-        Blog testBlog = new Blog("testId", "testname", "testDescription", "LinkToPicture", List.of("friend1", "friend2"), List.of("postId"));
+        Blog testBlog = new Blog("testId", "testname", "testDescription", "LinkToPicture", List.of("friend1", "friend2"), List.of("postId"), "password", "password");
         Mockito.when(testRepo.findBlogByBlogId("testId")).thenReturn(Optional.of(testBlog));
         testService.getUserById("testId");
         Mockito.verify(testRepo).findBlogByBlogId("testId");
@@ -75,7 +64,7 @@ class BlogServiceTest {
     void shouldFindUserBySearchQuery(){
         BlogRepo testRepo = Mockito.mock(BlogRepo.class);
         BlogService testService = new BlogService(testRepo);
-        Blog testBlog = new Blog("testId", "testname", "testDescription", "LinkToPicture", List.of("friend1", "friend2"), List.of("postId"));
+        Blog testBlog = new Blog("testId", "testname", "testDescription", "LinkToPicture", List.of("friend1", "friend2"), List.of("postId"), "password", "password");
         ArrayList<Blog> userList = new ArrayList<>();
         userList.add(testBlog);
         Mockito.when(testRepo.findAllByUsernameContainingIgnoreCase("testname")).thenReturn(Optional.of(userList));
@@ -98,7 +87,7 @@ class BlogServiceTest {
         List<String> friendlist = new ArrayList<>();
         friendlist.add("friendId1");
 
-        Blog testBlog = new Blog(null, "testname", "testDescription", "LinkToPicture", emptyList(), friendlist);
+        Blog testBlog = new Blog(null, "testname", "testDescription", "LinkToPicture", emptyList(), friendlist, "password", "password");
 
         Mockito.when(testRepo.findBlogByUsername("testname")).thenReturn(Optional.of(testBlog));
 

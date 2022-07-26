@@ -1,37 +1,64 @@
 import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
-import {getProfileDetails, sendFriendsList} from "../service/BlogService";
+import {useNavigate, useParams} from "react-router-dom";
+import {getFriendBlogDetails, getProfileDetails, sendFriendsList} from "../service/BlogService";
 import SearchFriends from "./SearchFriends";
-import FriendsPreview from "./FriendsPreview";
 import {FriendItem} from "../service/Model";
+import FriendComponent from "./FriendComponent";
 
-export default function BlogComponent(){
+interface BlogNameProps{
+    blogName: string
+}
+
+export default function BlogComponent(props: BlogNameProps){
 
     const {username} = useParams()
     const [profilePicture, setProfilePicture] = useState("")
     const [profileDescription, setProfileDescription] = useState("")
     const [friendList, setFriendList] = useState<Array<FriendItem>>([])
+    const nav = useNavigate()
+ //   const [errorCode, setErrorCode] = useState("")
 
 
     useEffect(()=>{
-        if (username){
-            getProfileDetails(username)
+        if (!username){
+            getProfileDetails()
                 .then(data => {
                     setProfilePicture(data.profilePicture)
                     setProfileDescription(data.profileDescription!)
                     return data
                 })
 
-                .then((data) => sendFriendsList(data.friendsList!)
-                    .then(data => setFriendList(data)))
+                .then((data) => {
+                    sendFriendsList(data.friendsList!)
+                        .then(data => setFriendList(data))
+                })
+               .catch((e) => {
+                    if(e.response.status === 403){
+                        nav("/")
+                    }
+                })
+
         }
-    }, [username])
+        else {
+            getFriendBlogDetails(username!)
+                .then(data => {
+                    setProfilePicture(data.profilePicture)
+                    setProfileDescription(data.profileDescription!)
+                    return data
+            })
+                .then((data) => {
+                    sendFriendsList(data.friendsList!)
+                        .then(data => setFriendList(data))
+                })
+        }
+
+    }, [username, nav])
 
 
 
 
-    const ListOfFriends = friendList.map(friend => <FriendsPreview blog={{username:friend.username, profilePicture:friend.profilePicture, blogId: friend.blogId}}/>)
-    console.log(friendList)
+    const ListOfFriends = friendList.map(friend => <FriendComponent friendItem={{username:friend.username, profilePicture:friend.profilePicture, blogId: friend.blogId}}/>)
+
 
    /* useEffect(() =>{
         if(friendList.length > 0){
@@ -46,7 +73,7 @@ export default function BlogComponent(){
     return(
         <>
             <div>
-                {username}
+                {props.blogName}
             </div>
             <div>
                 {profileDescription}

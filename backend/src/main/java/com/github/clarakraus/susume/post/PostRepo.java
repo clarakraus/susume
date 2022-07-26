@@ -7,6 +7,8 @@ import java.util.List;
 
 @Repository
 public interface PostRepo extends MongoRepository<Post,String> {
-    List<Post> findAllByCategory(Category category);
+    List<Post> findAllByCategoryAndCreater(Category category, String creator);
     Post findPostByPostId(String postId);
+
+    List<Post> findAllByCreater(String creator);
 }

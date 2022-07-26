@@ -1,21 +1,22 @@
 import {useEffect, useState} from "react";
 import {searchFriend} from "../service/BlogService";
-import {Blog} from "../service/Model";
+import {FriendItem} from "../service/Model";
 import FriendsPreview from "./FriendsPreview";
 
 export default function SearchFriends(){
     const[friendsName, setFriendsName] = useState("")
     const[message, setMessage] = useState("")
-    const [friendArray, setFriendArray] = useState<Array<Blog>>([])
-    const friendSearchList = friendArray.map(friend => <FriendsPreview blog={friend}/>)
+    const [friendArray, setFriendArray] = useState<Array<FriendItem>>([])
+    const friendSearchList = friendArray.map(friend =><FriendsPreview blog={friend}/>)
 
 
    useEffect(()=>{
+       if(friendsName){
        searchFriend(friendsName)
-           .then((data)=>setFriendArray(data))
+           .then((data) => setFriendArray(data))
            .catch(() => setMessage('username not found'))
 
-    }, [friendsName])
+    }}, [friendsName])
 
 
     return(

@@ -1,18 +1,30 @@
 import React, {useEffect, useState} from "react";
-import {getSusumes} from "../service/BlogService";
+import {getSusumes, getSusumesForFriendBlog} from "../service/BlogService";
 import SusumeComponent from "./SusumeComponent";
 import {Susume} from "../service/Model";
 
-export default function SusumeGallery(){
+interface SusumeCreatorProps{
+    creatorName: string
+}
+
+
+export default function SusumeGallery(props: SusumeCreatorProps){
 
     const [error, setError] = useState("")
     const [susumeArray, setSusumeArray] = useState<Array<Susume>>([])
     const susumeList = susumeArray.map(susume =><SusumeComponent susume={susume} />)
+
     useEffect(() =>{
-        getSusumes()
-            .then((data) => setSusumeArray(data))
-            .catch(() => setError('susumes could no not be loaded'))
-    }, [])
+        if(!props.creatorName) {
+            getSusumes()
+                .then((data) => setSusumeArray(data))
+                .catch(() => setError('susumes could no not be loaded'))
+        } else {
+            getSusumesForFriendBlog(props.creatorName)
+                .then((data)=>setSusumeArray(data))
+                .catch(() => setError('susumes could no not be loaded'))
+        }
+    }, [props.creatorName])
 
     return (
         <>

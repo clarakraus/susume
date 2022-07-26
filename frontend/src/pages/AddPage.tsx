@@ -1,17 +1,19 @@
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {postMovieToDB, searchTMDBForID} from "../service/BlogService";
 import React, {useEffect, useState} from "react";
 import {MoviePreview} from "../service/Model";
 
 export default function AddPage(){
     const {movieId} = useParams()
-    const {blogname} = useParams()
+ //   const {username} = useParams()
+    const nav = useNavigate()
+
     const [movieToAdd, setMovieToAdd] = useState({} as MoviePreview)
     const [id, setId] = useState("")
     const [homage, setHomage] = useState("")
-    const [genre, setGenre] = useState("")
-    const creater = blogname
+    const [genre, setGenre] = useState("NO_GENRE")
     const [errorMessage, setErrorMessage] = useState("")
+
 
 
 
@@ -33,8 +35,9 @@ export default function AddPage(){
 
 
     const postMovie = () =>{
-        if(creater){
-        postMovieToDB({id, homage, genre, creater})}
+
+        postMovieToDB({id, homage, genre})
+            .then(() => nav(`/profile`))
     }
 
 
