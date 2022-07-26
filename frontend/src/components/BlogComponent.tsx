@@ -56,7 +56,7 @@ function renderBlogComponent() {
 
     useEffect(()=>{
         renderBlogComponent()
-    }, [])
+    }, [renderBlogComponent])
 
 
 
