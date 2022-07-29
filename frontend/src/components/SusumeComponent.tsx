@@ -1,11 +1,14 @@
 import {Susume} from "../service/Model";
 import "./SusumeComponent.css"
-import {addToSaveList} from "../service/BlogService";
+import {addToSaveList, deletePosting, editBlog, editPostings, removeFromSaveList} from "../service/BlogService";
+import {useNavigate} from "react-router-dom";
 
 interface SusumeGalleryProps{
     susume: Susume
     addToSaveList: boolean
-
+    privateList: boolean
+    hasDeleteButton: boolean
+    isOnOwnBlolg: boolean
 }
 
 export default function SusumeComponent(props: SusumeGalleryProps){
@@ -16,14 +19,35 @@ export default function SusumeComponent(props: SusumeGalleryProps){
     const homage= props.susume.homage
     const genre= props.susume.genre
     const susumeId = props.susume.postId
+    const creator = props.susume.creater
+
+    const nav = useNavigate()
 
     const saveSusume = () => {
       addToSaveList(susumeId)
+          .then(() => nav("/profile/watchlist"))
     }
+    const deleteSusume = () => {
+        removeFromSaveList(susumeId)
+
+    }
+    const deleteSusumeOnProfile = () => {
+        deletePosting(susumeId)
+
+    }
+    const editSusume = () => {
+        editPostings(susumeId)
+            .then(() => nav(`/profile/edit/${susumeId}`))
+
+    }
+
     return(
         <>
            <div className={"singleSusume"}>
-                <div>
+               {props.privateList&& <div>
+                   From: {creator}
+               </div>}
+               <div>
                     {category}
                 </div>
                 <div>
@@ -38,6 +62,7 @@ export default function SusumeComponent(props: SusumeGalleryProps){
                 <div>
                     {category}
                 </div>
+
                 <div className="scroller">
                     {homage}
                 </div>
@@ -45,8 +70,16 @@ export default function SusumeComponent(props: SusumeGalleryProps){
                     {genre}
                 </div>
                {props.addToSaveList && <div>
-                    <button onClick={saveSusume}>add to favorites</button>
+                    <button onClick={saveSusume}>add to watchlist</button>
                 </div>}
+               {props.hasDeleteButton && <div>
+                   <button onClick={deleteSusume}>delete</button>
+               </div>}
+               {props.isOnOwnBlolg && <div>
+                   <button onClick={deleteSusumeOnProfile}>delete</button>
+                   <button onClick={editSusume}>edit</button>
+
+               </div>}
 
            </div>
 

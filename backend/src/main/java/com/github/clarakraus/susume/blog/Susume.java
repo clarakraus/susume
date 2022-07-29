@@ -3,12 +3,15 @@ package com.github.clarakraus.susume.blog;
 import com.github.clarakraus.susume.post.Category;
 import com.github.clarakraus.susume.post.Genre;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 
 public class Susume {
    private String postId;

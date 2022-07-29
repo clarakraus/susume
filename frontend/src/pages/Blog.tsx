@@ -2,10 +2,10 @@
 import BlogComponent from "../components/BlogComponent";
 import MovieApiSearch from "../components/MovieApiSearch";
 import SusumeGallery from "../components/SusumeGallery";
-import {useNavigate, useParams} from "react-router-dom";
-import WatchlistPage from "./WatchlistPage";
-import {getFriendBlogDetails, getProfileDetails, sendFriendsList} from "../service/BlogService";
-import {useEffect, useState} from "react";
+import {NavLink, useNavigate, useParams} from "react-router-dom";
+
+import {getProfileDetails, sendFriendsList} from "../service/BlogService";
+import {useCallback, useEffect, useState} from "react";
 import {FriendItem} from "../service/Model";
 import SearchFriends from "../components/SearchFriends";
 import FriendComponent from "../components/FriendComponent";
@@ -19,10 +19,11 @@ export default function Blog(){
     const nav = useNavigate()
 
 
-    function renderBlogComponent() {
+   const renderBlogComponent = useCallback(() => {
         if (!username){
             getProfileDetails()
                 .then(data => {
+
                     setProfilePicture(data.profilePicture)
                     setProfileDescription(data.profileDescription!)
                     return data
@@ -41,8 +42,6 @@ export default function Blog(){
         }
         else {
             nav(`/profile/${username}`)
-
-
         }
 
 
@@ -59,8 +58,10 @@ export default function Blog(){
 
            */
 
+    }, [username, nav])
 
-    }
+
+
     useEffect(()=>{
         renderBlogComponent()
     }, [renderBlogComponent])
@@ -78,18 +79,26 @@ export default function Blog(){
             <div>
                 <BlogComponent username={username!} profilePicture={profilePicture} profileDescription={profileDescription} />
             </div>
+            <NavLink to={"/profile/edit/blog"}><div>
+                <button>edit profile</button>
+            </div>
+            </NavLink>
             <div>
                 <MovieApiSearch/>
             </div>
             <div>
-                <SusumeGallery  addToSaveList={false} creatorName={username!}/>
+                <SusumeGallery  addToSaveList={false} creatorName={username!} privateList={false} hasDeleteButton={false} shownOnOwnBlog={true}/>
             </div>
             <div>
                 <SearchFriends renderBlog={renderBlogComponent}/>
             </div>
-            <div>
-                <WatchlistPage/>
-            </div>
+
+            <NavLink to={"/profile/watchlist"}>
+                <div>
+                   personal watchlist
+                </div>
+            </NavLink>
+
             <div>
                 {ListOfFriends}
             </div>

@@ -5,6 +5,7 @@ import lombok.Data;
 public interface Content {
 
     String getTitle();
+    long getId();
 
 
 }

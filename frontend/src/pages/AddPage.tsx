@@ -52,7 +52,7 @@ export default function AddPage(){
                 <p> {movieToAdd.release_date} </p>
             </div>
             <div>
-                <input type="text" placeholder={"tell the your friends why you love this movie"} onChange={event => setHomage( event.target.value)}/>
+                <textarea placeholder={"tell your friends why you love this movie"} onChange={event => setHomage( event.target.value)}/>
             </div>
             <div>
                 <label>You decide the genre</label>

@@ -1,4 +1,4 @@
-package com.github.clarakraus.susume.blog;
+package com.github.clarakraus.susume.post;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class FriendDTO {
-    private String username;
-    private String profilePicture;
-    private String blogId;
+public class EditPostData {
+    private String homage;
+    private Genre genre;
 }

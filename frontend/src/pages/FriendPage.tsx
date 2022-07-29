@@ -1,7 +1,7 @@
 import BlogComponent from "../components/BlogComponent";
 import {useNavigate, useParams} from "react-router-dom";
 import SusumeGallery from "../components/SusumeGallery";
-import {getFriendBlogDetails, getProfileDetails, sendFriendsList} from "../service/BlogService";
+import {getFriendBlogDetails, sendFriendsList} from "../service/BlogService";
 import {useEffect, useState} from "react";
 import {FriendItem} from "../service/Model";
 import FriendComponent from "../components/FriendComponent";
@@ -33,7 +33,7 @@ export default function FriendPage(){
                     }
                 })
         }
-    }, [username])
+    }, [username, nav])
     const ListOfFriends = friendList.map(friend => <FriendComponent friendItem={{username:friend.username, profilePicture:friend.profilePicture, blogId: friend.blogId}}/>)
 
 
@@ -46,7 +46,7 @@ export default function FriendPage(){
                 {ListOfFriends}
             </div>
             <div>
-                <SusumeGallery addToSaveList={true} creatorName={username!}/>
+                <SusumeGallery addToSaveList={true} creatorName={username!} privateList={false} hasDeleteButton={false} shownOnOwnBlog={false}/>
             </div>
         </>
     )

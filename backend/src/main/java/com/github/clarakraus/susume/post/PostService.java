@@ -4,7 +4,6 @@ import com.github.clarakraus.susume.blog.Movie;
 import com.github.clarakraus.susume.blog.MovieApiConnection;
 import com.github.clarakraus.susume.blog.Susume;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -48,11 +47,29 @@ public class PostService {
         List<Post> postList = favoritesList.stream()
                 .map(this::findPostByPostId)
                 .toList();
-        List<Susume> favoriteSusumes = postList.stream()
+        List<Susume> savedSusumes = postList.stream()
                 .map(post -> susumeMapper.map(getMovieById(post.getId()), post))
                 .toList();
-        return favoriteSusumes;
+        return savedSusumes;
+    }
+    public Susume getSusumeByPostId(String postId){
+        Post post = findPostByPostId(postId);
+        Movie movie = movieApiConnection.getMovieFromTMDBById(post.getId());
+        return susumeMapper.map(movie, post);
     }
 
 
-       }
+    public void eraseCreatorAndHomage(String susumePostId) {
+        Post post = findPostByPostId(susumePostId);
+        post.setCreater("");
+        post.setHomage("");
+        postRepo.save(post);
+    }
+
+    public void editPost(String susumePostId, EditPostData editPostData) {
+        Post post = findPostByPostId(susumePostId);
+        post.setHomage(editPostData.getHomage());
+        post.setGenre(editPostData.getGenre());
+        postRepo.save(post);
+    }
+}
