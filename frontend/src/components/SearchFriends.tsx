@@ -3,11 +3,16 @@ import {searchFriend} from "../service/BlogService";
 import {FriendItem} from "../service/Model";
 import FriendsPreview from "./FriendsPreview";
 
-export default function SearchFriends(){
+interface BlogProps{
+    renderBlog: Function
+}
+
+
+export default function SearchFriends(props: BlogProps){
     const[friendsName, setFriendsName] = useState("")
     const[message, setMessage] = useState("")
     const [friendArray, setFriendArray] = useState<Array<FriendItem>>([])
-    const friendSearchList = friendArray.map(friend =><FriendsPreview blog={friend}/>)
+    const friendSearchList = friendArray.map(friend =><FriendsPreview setFriendsName={setFriendsName} renderBlog={props.renderBlog}  blog={friend}/>)
 
 
    useEffect(()=>{
@@ -16,7 +21,10 @@ export default function SearchFriends(){
            .then((data) => setFriendArray(data))
            .catch(() => setMessage('username not found'))
 
-    }}, [friendsName])
+    } else{
+           setFriendArray([])
+       }
+       }, [friendsName])
 
 
     return(
@@ -27,7 +35,6 @@ export default function SearchFriends(){
             <div>
                 <input type="text" placeholder="username" value={friendsName}
                        onChange={ev => setFriendsName(ev.target.value)}/>
-                <button type="submit">search</button>
             </div>
             <div>
                 {friendSearchList}

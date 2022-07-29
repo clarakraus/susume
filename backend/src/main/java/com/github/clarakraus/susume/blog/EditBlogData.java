@@ -6,11 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class FriendDTO {
-    private String username;
+public class EditBlogData {
     private String profilePicture;
-    private String blogId;
+    private String profileDescription;
 }

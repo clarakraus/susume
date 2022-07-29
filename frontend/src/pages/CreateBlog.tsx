@@ -32,7 +32,7 @@ export default function CreateBlog(){
                        onChange={event => setUsername(event.target.value)}/>
             </div>
             <div>
-                <input type="text" placeholder="tell us something about yourself"
+                <textarea  placeholder="tell us something about yourself"
                        onChange={event => setProfileDescription(event.target.value)}/>
             </div>
 

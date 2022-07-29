@@ -5,6 +5,8 @@ import Blog from "./pages/Blog";
 import AddPage from "./pages/AddPage";
 import LoginPage from "./pages/LoginPage";
 import FriendPage from "./pages/FriendPage";
+import WatchlistPage from "./pages/WatchlistPage";
+import EditBlogPage from "./pages/EditBlogPage";
 
 export default function App() {
     return (
@@ -15,6 +17,9 @@ export default function App() {
                 <Route path={"/profile"} element={<Blog/>}/>
                 <Route path={"/profile/:username"} element={<FriendPage/>}/>
                 <Route path={"/profile/addnew/:movieId"} element={<AddPage/>}/>
+                <Route path={"/profile/watchlist"} element={<WatchlistPage/>}/>
+                <Route path={"/profile/edit/blog"} element={<EditBlogPage/>}/>
+                <Route path={"/profile/edit/:susumeId"} element={<AddPage/>}/>
             </Routes>
         </BrowserRouter>
     )

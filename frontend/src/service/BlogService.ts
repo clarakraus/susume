@@ -1,5 +1,15 @@
 import axios, {AxiosResponse} from "axios";
-import {Blog, FriendItem, LoginData, LoginResponse, MoviePost, MoviePreview, RegisterDetails, Susume} from "./Model";
+import {
+    Blog,
+    EditBlogData,
+    FriendItem,
+    LoginData,
+    LoginResponse,
+    MoviePost,
+    MoviePreview,
+    RegisterDetails,
+    Susume
+} from "./Model";
 
 export function postProfile(registerDetails: RegisterDetails){
     return axios.post("/user/register", registerDetails)
@@ -86,7 +96,43 @@ export function sendFriendsList(friendsList: Array<string>){
     } )
         .then((response: AxiosResponse<FriendItem[]>)=> response.data)
 }
-export const loginUser = (loginData: LoginData) => {
+export function loginUser(loginData: LoginData){
     return axios.post('/api/login', loginData)
         .then((response: AxiosResponse<LoginResponse>) => response.data)
+}
+
+export function addToSaveList(susumeId: string){
+    return axios.put(`/blog/collection/save/${susumeId}`, {},{
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('jwt')}`
+        }
+    })
+}
+export function removeFromSaveList(susumeId: string){
+    return axios.put(`/blog/collection/delete/${susumeId}`, {},{
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('jwt')}`
+        }
+    })
+}
+export function editBlog(editBlogData: EditBlogData, blogId: string){
+    return axios.put(`/blog/edit/${blogId}`, editBlogData,{
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('jwt')}`
+        }
+    })
+}
+export function deletePosting(postId: string){
+    return axios.put(`/postings/delete/${postId}`, {},  {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('jwt')}`
+        }
+    })
+}
+export function editPostings(postId: string){
+    return axios.put(`/postings/edit/${postId}`,{} ,{
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('jwt')}`
+        }
+    })
 }

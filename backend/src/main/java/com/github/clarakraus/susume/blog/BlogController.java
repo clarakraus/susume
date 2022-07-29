@@ -30,15 +30,8 @@ public class BlogController {
     @GetMapping("/details")
     public ResponseEntity<BlogDTO> getBlogDetails(Principal principal) {
         try {
-            Blog blog = (blogService.getBlogDetails(principal.getName()));
-            BlogDTO blogDTO =  new BlogDTO();
-            blogDTO.setBlogId(blog.getBlogId());
-            blogDTO.setUsername(blog.getUsername());
-            blogDTO.setProfilePicture(blog.getProfilePicture());
-            blogDTO.setProfileDescription(blog.getProfileDescription());
-            blogDTO.setFriendsList(blog.getFriendsList());
-            blogDTO.setSavedSusumes(blog.getSavedSusumes());
-            return ResponseEntity.ok(blogDTO);
+           return ResponseEntity.ok(blogService.getBlogDetails(principal.getName()));
+
         } catch (NoSuchElementException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
@@ -46,14 +39,7 @@ public class BlogController {
     @GetMapping("/getfriendblog/{username}")
     public ResponseEntity<BlogDTO> getBlogDetails(@PathVariable String username) {
         try {
-            Blog blog = (blogService.getBlogDetails(username));
-            BlogDTO blogDTO =  new BlogDTO();
-            blogDTO.setBlogId(blog.getBlogId());
-            blogDTO.setUsername(blog.getUsername());
-            blogDTO.setProfilePicture(blog.getProfilePicture());
-            blogDTO.setProfileDescription(blog.getProfileDescription());
-            blogDTO.setFriendsList(blog.getFriendsList());
-            return ResponseEntity.ok(blogDTO);
+           return ResponseEntity.ok(blogService.getBlogDetails(username));
         } catch (NoSuchElementException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
@@ -64,13 +50,9 @@ public class BlogController {
     public ResponseEntity<List<FriendDTO>> findFriend(@PathVariable String friend) {
         try {
             List<Blog> friendBlogs = blogService.findUsers(friend);
-            List<FriendDTO> friendBlogDTO = friendBlogs.stream().map(blog ->{
-                FriendDTO friendDTO =  new FriendDTO();
-                friendDTO.setBlogId(blog.getBlogId());
-                friendDTO.setUsername(blog.getUsername());
-                friendDTO.setProfilePicture(blog.getProfilePicture());
-                return friendDTO;
-            }).toList();
+            List<FriendDTO> friendBlogDTO = friendBlogs.stream()
+                    .map(Blog::buildFriendDTO)
+                    .toList();
            return ResponseEntity.ok(friendBlogDTO);
         } catch (NoSuchElementException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -89,13 +71,16 @@ public class BlogController {
         try {
             List<FriendDTO> friendDTOList = friendList.stream()
                     .map(blogService::getUserById)
-                    .map(user -> {
-                        FriendDTO friendDTO = new FriendDTO();
+                    .map(Blog::buildFriendDTO)
+
+                       /* FriendDTO friendDTO = new FriendDTO();
                         friendDTO.setUsername(user.getUsername());
                         friendDTO.setBlogId(user.getBlogId());
                         friendDTO.setProfilePicture(user.getProfilePicture());
                         return friendDTO;
-                    })
+
+                        */
+
                     .toList();
             return ResponseEntity.ok(friendDTOList);
         } catch (Exception e) {
@@ -104,9 +89,19 @@ public class BlogController {
     }
 
     //Todo: finish
-    @PutMapping("/watchlist")
-    public ResponseEntity<Void> addToFavorites(@PathVariable String susumeId, Principal principal){
-        blogService.addToFavorites(susumeId, principal.getName());
+    @PutMapping("/collection/save/{susumeId}")
+    public ResponseEntity<Void> addToSaves(@PathVariable String susumeId, Principal principal){
+        blogService.addToSaves(susumeId, principal.getName());
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+    @PutMapping("/collection/delete/{susumeId}")
+    public ResponseEntity<Void> removeFromSaves(@PathVariable String susumeId, Principal principal){
+        blogService.removeFromSaves(susumeId, principal.getName());
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+    @PutMapping("/edit/{blogId}")
+    public ResponseEntity<Void> editBlog(@RequestBody EditBlogData editBlogData, @PathVariable String blogId){
+        blogService.editBlog(editBlogData, blogId);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

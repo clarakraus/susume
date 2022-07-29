@@ -2,9 +2,10 @@
 export interface Blog{
     blogId: string
     username:string
-    profileDescription?: string
+    profileDescription: string
     profilePicture: string
-    friendsList?: Array<string>
+    friendsList: Array<string>
+    savedSusumes:Array<Susume>
 }
 
 export interface MoviePreview{
@@ -24,7 +25,7 @@ export interface MoviePost{
 export interface Susume{
     category: string
     content: Content
-    id: string
+    postId: string
     poster_path: string
     homage: string
     genre: string
@@ -33,6 +34,7 @@ export interface Susume{
 
 export interface Content {
     title: string
+    originalTitle: string
     overview: string
     poster_path: string
 }
@@ -45,7 +47,7 @@ export interface RegisterDetails {
     username: string
     password: string
     passwordRepeat: string
-    profileDescription?: string
+    profileDescription: string
     profilePicture: string
 }
 export interface LoginData {
@@ -54,4 +56,12 @@ export interface LoginData {
 }
 export interface LoginResponse {
     jwt: string
+}
+export interface EditBlogData {
+    profilePicture: string
+    profileDescription: string
+}
+export interface EditPostData{
+    homage: string
+    genre: String
 }
