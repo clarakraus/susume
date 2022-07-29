@@ -1,6 +1,6 @@
 import {Susume} from "../service/Model";
 import "./SusumeComponent.css"
-import {addToSaveList, deletePosting, editBlog, editPostings, removeFromSaveList} from "../service/BlogService";
+import {addToSaveList, deletePosting, editPostings, removeFromSaveList} from "../service/BlogService";
 import {useNavigate} from "react-router-dom";
 
 interface SusumeGalleryProps{

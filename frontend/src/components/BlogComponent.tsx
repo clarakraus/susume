@@ -1,9 +1,3 @@
-import {useCallback, useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
-import {getFriendBlogDetails, getProfileDetails, sendFriendsList} from "../service/BlogService";
-import SearchFriends from "./SearchFriends";
-import {FriendItem} from "../service/Model";
-import FriendComponent from "./FriendComponent";
 
 interface BlogProps{
     username: string

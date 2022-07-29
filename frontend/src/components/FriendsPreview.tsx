@@ -1,4 +1,4 @@
-import {Blog, FriendItem} from "../service/Model";
+import {FriendItem} from "../service/Model";
 import "./FriendsPreview.css"
 import {addFriend} from "../service/BlogService";
 import {useNavigate} from "react-router-dom";
