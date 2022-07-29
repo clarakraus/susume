@@ -16,7 +16,7 @@ export default function EditBlogPage(){
                 setBlogId(data.blogId)
             })
             .catch(() => nav("/"))
-    }, [])
+    }, [nav])
 
     const saveChanges = () => {
         editBlog({profileDescription, profilePicture}, blogId)
