@@ -75,9 +75,8 @@ public class Blog {
         } savedSusumes.remove(susumePostId);
 
     }
-    public Blog changeBlogInfos(EditBlogData editBlogData, Blog blog){
+    public void changeBlogInfos(EditBlogData editBlogData, Blog blog){
         blog.setProfileDescription(editBlogData.getProfileDescription());
         blog.setProfilePicture(editBlogData.getProfilePicture());
-        return blog;
     }
 }

@@ -37,17 +37,17 @@ class PostServiceTest {
         Movie movieInPost1 = new Movie(12345, "originalTitle1", "title1","overview1", "poster1", "releaseDate1" );
         Movie movieInPost2 = new Movie(6789, "originalTitle2", "title2","overview2", "poster2", "releaseDate2" );
 
-        Susume susu1 = new Susume(Category.Movie, movieInPost1, "testHomage1", Genre.COMEDY, "creator1");
-        Susume susu2 = new Susume(Category.Movie, movieInPost2, "testHomage2", Genre.ACTION, "creator1");
+        Susume susu1 = Susume.builder().postId("testPostid1").category(Category.Movie).content(movieInPost1).homage("testHomage1").genre(Genre.COMEDY).creater("creator1").build();
+        Susume susu2 = Susume.builder().postId("testPostid2").category(Category.Movie).content(movieInPost2).homage("testHomage2").genre(Genre.ACTION).creater("creator1").build();
 
         PostService testPostService = new PostService(testPostRepo, testConnection, susumap);
 
         Mockito.when(testPostRepo.findAllByCreater("creator1")).thenReturn(postListFromRepo);
         Mockito.when(testConnection.getMovieFromTMDBById(12345)).thenReturn(movieInPost1);
         Mockito.when(testConnection.getMovieFromTMDBById(6789)).thenReturn(movieInPost2);
-
+        var versuch = testPostService.getAllSusumes("creator1");
+        System.out.println(versuch);
         Assertions.assertThat(testPostService.getAllSusumes("creator1")).contains(susu1, susu2);
-
     }
 
 }
