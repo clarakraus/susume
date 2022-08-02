@@ -1,7 +1,7 @@
 import axios, {AxiosResponse} from "axios";
 import {
     Blog,
-    EditBlogData,
+    EditBlogData, EditPostData,
     FriendItem,
     LoginData,
     LoginResponse,
@@ -129,10 +129,19 @@ export function deletePosting(postId: string){
         }
     })
 }
-export function editPostings(postId: string){
-    return axios.put(`/postings/edit/${postId}`,{} ,{
+export function editPostings(postId: string, editPostData: EditPostData){
+    return axios.put(`/postings/edit/${postId}`,editPostData ,{
         headers: {
             Authorization: `Bearer ${localStorage.getItem('jwt')}`
         }
     })
+}
+export function getSingleSusume(susumePostId: string){
+    return axios.get(`/postings/${susumePostId}`, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('jwt')}`
+        }
+    })
+        .then((response:AxiosResponse<Susume>)=> response.data)
+
 }

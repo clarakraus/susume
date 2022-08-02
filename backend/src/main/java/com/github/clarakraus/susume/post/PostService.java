@@ -63,6 +63,7 @@ public class PostService {
         Post post = findPostByPostId(susumePostId);
         post.setCreater("");
         post.setHomage("");
+        post.setGenre(Genre.NO_GENRE);
         postRepo.save(post);
     }
 

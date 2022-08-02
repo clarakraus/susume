@@ -1,6 +1,15 @@
 import React, {useState} from "react";
 import {postProfile} from "../service/BlogService";
 import {useNavigate} from "react-router-dom";
+import {Button, createTheme, TextField, ThemeProvider} from "@mui/material";
+
+const theme = createTheme({
+    palette: {
+        secondary: {
+            main: '#FEFBE7',
+        },
+    },
+});
 
 export default function CreateBlog(){
 
@@ -18,7 +27,6 @@ export default function CreateBlog(){
         if(username) {
             postProfile({username, password, passwordRepeat, profileDescription, profilePicture})
                 .then(() => nav("/"))
-   //             .then(() => nav("/profile/" + username))
         } else {
             setMessage("please enter a username")
         }
@@ -26,25 +34,32 @@ export default function CreateBlog(){
 
     return(
         <>
-            {message && <div>{message}</div>}
-            <div>
-                <input type="text" placeholder="choose a username"
-                       onChange={event => setUsername(event.target.value)}/>
-            </div>
-            <div>
-                <textarea  placeholder="tell us something about yourself"
-                       onChange={event => setProfileDescription(event.target.value)}/>
+            <div className={"formwrapper"}>
+                {message && <div>{message}</div>}
+                <h2>Create your account</h2>
+                <div className={"divSpacer"}>
+                    <TextField variant={"filled"} size={"small"} type="text" placeholder="choose a username"
+                           onChange={event => setUsername(event.target.value)}/>
+                </div>
+                <div className={"divSpacer"}>
+                <TextField variant={"filled"} multiline rows={4} size={"small"} placeholder="tell us something about yourself"
+                           onChange={event => setProfileDescription(event.target.value)}/>
+                </div>
+
+                <div className={"divSpacer"}>
+                    <TextField variant={"filled"} size={"small"} placeholder="profile picture URL" onChange={event => setProfilePicture(event.target.value)}/>
+                </div>
+                <div className={"divSpacer"}>
+                    <TextField variant={"filled"} size={"small"} type="password" placeholder={"password"} onChange={event => setPassword(event.target.value)} value={password}/>
+                </div>
+                <div className={"divSpacer"}>
+                    <TextField variant={"filled"} size={"small"} type="password" placeholder={"repeat password"} onChange={event => setPasswordRepeat(event.target.value)} value={passwordRepeat}/>
+                </div>
+                <ThemeProvider theme={theme}>
+                    <Button color={"secondary"} size={"small"} variant={"contained"} onClick={createProfile} >register</Button>
+                </ThemeProvider>
             </div>
 
-            <div>
-                <input type="picture" placeholder="upload your picture here" onChange={event => setProfilePicture(event.target.value)}/>
-            </div>
-            <div>
-                <input type="password" placeholder={"password"} onChange={event => setPassword(event.target.value)} value={password}/>
-                <input type="password" placeholder={"repeat password"} onChange={event => setPasswordRepeat(event.target.value)} value={passwordRepeat}/>
-            </div>
-
-            <button onClick={createProfile}>create profile</button>
         </>
     )
 }
