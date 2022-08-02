@@ -28,7 +28,7 @@ export default function EditSusumePage(){
                 })
         }
 
-    }, [])
+    }, [susumeId])
 
     const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setGenre(event.target.value);
