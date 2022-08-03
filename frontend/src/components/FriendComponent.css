@@ -1,0 +1,11 @@
+.friendAlign{
+    display: flex;
+    flex-direction: row;
+}
+.divSizeing{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    width: 4rem;
+    height: 3.5rem;
+}

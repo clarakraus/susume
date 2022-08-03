@@ -1,3 +1,4 @@
+import {Avatar} from "@mui/material";
 
 interface BlogProps{
     username: string
@@ -11,6 +12,7 @@ export default function BlogComponent(props: BlogProps){
     const username = props.username
     const picture = props.profilePicture
     const description = props.profileDescription
+
   //  const friendlist = props.friendsList
  //   const [errorCode, setErrorCode] = useState("")
 
@@ -35,7 +37,7 @@ export default function BlogComponent(props: BlogProps){
                 {description}
             </div>
             <div>
-                <img src={picture} alt="profile avatar"/>
+                <Avatar src={picture} alt="profile avatar" sx={{ width: 150, height: 150 }}/>
             </div>
 
         </>

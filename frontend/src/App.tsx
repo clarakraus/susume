@@ -7,6 +7,8 @@ import LoginPage from "./pages/LoginPage";
 import FriendPage from "./pages/FriendPage";
 import WatchlistPage from "./pages/WatchlistPage";
 import EditBlogPage from "./pages/EditBlogPage";
+import "./App.css"
+import EditSusumePage from "./pages/EditSusumePage";
 
 export default function App() {
     return (
@@ -19,7 +21,7 @@ export default function App() {
                 <Route path={"/profile/addnew/:movieId"} element={<AddPage/>}/>
                 <Route path={"/profile/watchlist"} element={<WatchlistPage/>}/>
                 <Route path={"/profile/edit/blog"} element={<EditBlogPage/>}/>
-                <Route path={"/profile/edit/:susumeId"} element={<AddPage/>}/>
+                <Route path={"/profile/edit/:susumeId"} element={<EditSusumePage/>}/>
             </Routes>
         </BrowserRouter>
     )

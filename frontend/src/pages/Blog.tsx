@@ -9,6 +9,9 @@ import {useCallback, useEffect, useState} from "react";
 import {FriendItem} from "../service/Model";
 import SearchFriends from "../components/SearchFriends";
 import FriendComponent from "../components/FriendComponent";
+import {BottomNavigation, BottomNavigationAction, Paper} from "@mui/material";
+import {TopNavBar} from "../components/TopNavBar";
+
 
 
 export default function Blog(){
@@ -62,6 +65,7 @@ export default function Blog(){
 
 
 
+
     useEffect(()=>{
         renderBlogComponent()
     }, [renderBlogComponent])
@@ -74,7 +78,7 @@ export default function Blog(){
     return(
         <>
             <div>
-                <header/>
+                <TopNavBar/>
             </div>
             <div>
                 <BlogComponent username={username!} profilePicture={profilePicture} profileDescription={profileDescription} />
@@ -87,22 +91,24 @@ export default function Blog(){
                 <MovieApiSearch/>
             </div>
             <div>
-                <SusumeGallery  addToSaveList={false} creatorName={username!} privateList={false} hasDeleteButton={false} shownOnOwnBlog={true}/>
+                <SusumeGallery  addToSaveList={false} creatorName={username!} privateList={false} hasDeleteButton={false} shownOnOwnBlog={true} />
             </div>
             <div>
                 <SearchFriends renderBlog={renderBlogComponent}/>
             </div>
 
-            <NavLink to={"/profile/watchlist"}>
-                <div>
-                   personal watchlist
-                </div>
-            </NavLink>
-
             <div>
                 {ListOfFriends}
             </div>
-
+            <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+                <BottomNavigation
+                    showLabels
+                >
+                    <BottomNavigationAction label="Watchlist" onClick={() => nav("/profile/watchlist")}/>
+                    <BottomNavigationAction label="Friends" />
+                    <BottomNavigationAction label="Edit profile" onClick={() => nav("/profile/edit/blog")}/>
+                </BottomNavigation>
+            </Paper>
         </>
     )
 

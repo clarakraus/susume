@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {getSusumes, getSusumesForFriendBlog} from "../service/BlogService";
 import SusumeComponent from "./SusumeComponent";
 import {Susume} from "../service/Model";
+import "./SusumeGallery.css";
 
 interface BlogProps{
     creatorName: string
@@ -16,7 +17,7 @@ export default function SusumeGallery(props: BlogProps){
 
     const [error, setError] = useState("")
     const [susumeArray, setSusumeArray] = useState<Array<Susume>>([])
-    const susumeList = susumeArray.map(susume =><SusumeComponent addToSaveList={props.addToSaveList} susume={susume} privateList={props.privateList}  hasDeleteButton={props.hasDeleteButton} isOnOwnBlolg={props.shownOnOwnBlog}/>)
+    const susumeList = susumeArray.map(susume =><SusumeComponent key={susume.postId} addToSaveList={props.addToSaveList} susume={susume} privateList={props.privateList}  hasDeleteButton={props.hasDeleteButton} isOnOwnBlolg={props.shownOnOwnBlog}/>)
 
     useEffect(() =>{
         if(!props.creatorName) {
@@ -33,7 +34,7 @@ export default function SusumeGallery(props: BlogProps){
     return (
         <>
             {error && <div>{error}</div>}
-            <div>
+            <div className={"susumeAlign"}>
                 {susumeList}
             </div>
         </>

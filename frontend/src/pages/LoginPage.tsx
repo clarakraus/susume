@@ -1,6 +1,16 @@
 import {FormEvent, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {loginUser} from "../service/BlogService";
+import "./LoginPage.css"
+import {Button, createTheme, TextField, ThemeProvider} from "@mui/material";
+
+const theme = createTheme({
+    palette: {
+        secondary: {
+            main: '#FEFBE7',
+        },
+    },
+});
 
 export default function LoginPage(){
     const [username, setUsername] = useState('')
@@ -18,15 +28,24 @@ export default function LoginPage(){
     }
 
     return (
-        <div>
-            <h3>Login</h3>
-            You don't have an account? <Link to="/register">No account yet? Get one here</Link>
-            <form onSubmit={login}>
-                <input type="text" value={username} onChange={ev => setUsername(ev.target.value)} placeholder="Username" />
-                <input type="password" value={password} onChange={ev => setPassword(ev.target.value)} placeholder="Password" />
-                <input type="submit" value="Login" />
+        <div className={"formwrapper"}>
+            <h2>Login</h2>
+                <form onSubmit={login}>
+                    <div>
+                        <TextField variant="filled" size="small" type="text" value={username} onChange={ev => setUsername(ev.target.value)} placeholder="Username" />
+                    </div>
+                    <div >
+                    <TextField  variant="filled" size={"small"} type="password" value={password} onChange={ev => setPassword(ev.target.value)} placeholder="Password" />
+                    </div>
+                    <div className={"divSpacer"}>
+                        <ThemeProvider theme={theme}>
+                            <Button color={"secondary"} size={"small"} variant={"contained"} type="submit" >login</Button>
+                        </ThemeProvider>
+                    </div>
+                </form>
+
                 { errorMessage && <div>{errorMessage}</div> }
-            </form>
+            You don't have an account? <Link className={"planeLink"}  to="/register">Get one here</Link>
 
         </div>
     )
