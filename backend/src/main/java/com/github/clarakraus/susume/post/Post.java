@@ -7,6 +7,10 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,5 +24,9 @@ public class Post {
    private long id;
    private String homage;
    private String creater;
+   private String creatorId;
+   private long createdAt;
+   private long updatedAt;
+   private List<Comment> comments = new ArrayList<>();
 
 }

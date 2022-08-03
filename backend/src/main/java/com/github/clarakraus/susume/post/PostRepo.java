@@ -11,4 +11,9 @@ public interface PostRepo extends MongoRepository<Post,String> {
     Post findPostByPostId(String postId);
 
     List<Post> findAllByCreater(String creator);
+
+
+
+    List<Post> findFirst10ByCreatorIdInOrderByCreatedAtDesc(List<String> userId);
+
 }

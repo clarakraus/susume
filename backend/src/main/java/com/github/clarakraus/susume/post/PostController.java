@@ -20,13 +20,6 @@ public class PostController {
 
     private final PostService postService;
 
-    @PostMapping("/movie/new")
-    public ResponseEntity<Void> postMovie(@RequestBody Post post, Principal principal) {
-        post.setCreater(principal.getName());
-        postService.createPost(post, principal.getName());
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
-
     @GetMapping("/movie/id/{movieId}")
     public ResponseEntity<Movie> getMovie(@PathVariable long movieId) {
         try {
@@ -69,4 +62,6 @@ public class PostController {
     public ResponseEntity<Susume> getSusume(@PathVariable String susumePostId){
         return ResponseEntity.ok(postService.getSusumeByPostId(susumePostId));
     }
+
+
 }

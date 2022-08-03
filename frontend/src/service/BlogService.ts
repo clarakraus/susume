@@ -48,7 +48,7 @@ export function searchTMDBForID(movieId: string){
         .then((response:AxiosResponse<MoviePreview>) => response.data)
 }
 export function postMovieToDB(movie: MoviePost){
-    return axios.post("/postings/movie/new", movie, {
+    return axios.post("/blog/postings/movie/new", movie, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem('jwt')}`
         }
@@ -144,4 +144,12 @@ export function getSingleSusume(susumePostId: string){
     })
         .then((response:AxiosResponse<Susume>)=> response.data)
 
+}
+export function getSusumesForNewsFeed(){
+    return axios.get(`/blog/postings/newsfeed`, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('jwt')}`
+        }
+    })
+        .then((response:AxiosResponse<Susume[]>)=> response.data)
 }

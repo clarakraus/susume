@@ -122,13 +122,8 @@
     border-radius: 8px;
 }
 
-.card-front {
-
-}
-
 .card-back {
     transform: rotateY(180deg);
-
 }
 .inhibitFlip{
     z-index: 3;

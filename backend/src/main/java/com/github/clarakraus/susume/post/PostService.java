@@ -1,5 +1,6 @@
 package com.github.clarakraus.susume.post;
 
+import com.github.clarakraus.susume.blog.BlogService;
 import com.github.clarakraus.susume.blog.Movie;
 import com.github.clarakraus.susume.blog.MovieApiConnection;
 import com.github.clarakraus.susume.blog.Susume;
@@ -18,12 +19,16 @@ public class PostService {
 
     private final SusumeMapper susumeMapper;
 
-    public void createPost(Post post, String creator) {
+
+    public void createPost(Post post, String creator, String creatorId) {
         List<Post> allPostings = postRepo.findAllByCategoryAndCreater(Category.Movie, creator);
         if(allPostings.stream().anyMatch(post1 -> post1.getId() == post.getId())){
             throw new RuntimeException("this movie ID is already in your susumes");
         } else {
             post.setCategory(Category.Movie);
+            post.setCreatedAt(System.currentTimeMillis());
+            post.setUpdatedAt(System.currentTimeMillis());
+            post.setCreatorId(creatorId);
             postRepo.save(post);
         }
     }
@@ -71,6 +76,14 @@ public class PostService {
         Post post = findPostByPostId(susumePostId);
         post.setHomage(editPostData.getHomage());
         post.setGenre(editPostData.getGenre());
+        post.setUpdatedAt(System.currentTimeMillis());
         postRepo.save(post);
+    }
+    public List<Susume> getSusumesForNewsFeed(List<String> friendIds){
+            List<Post> newsFeedPostList = postRepo.findFirst10ByCreatorIdInOrderByCreatedAtDesc(friendIds);
+            List<String> postIdList = newsFeedPostList.stream()
+                    .map(Post::getPostId)
+                    .toList();
+        return postIdList.stream().map(this::getSusumeByPostId).toList();
     }
 }
