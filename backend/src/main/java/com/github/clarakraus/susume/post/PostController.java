@@ -62,6 +62,11 @@ public class PostController {
     public ResponseEntity<Susume> getSusume(@PathVariable String susumePostId){
         return ResponseEntity.ok(postService.getSusumeByPostId(susumePostId));
     }
+    @PutMapping("/comment")
+    public ResponseEntity<Void> postComment(Principal principal, @RequestBody Comment comment){
+        postService.createComment(comment, principal.getName());
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 
 
 }

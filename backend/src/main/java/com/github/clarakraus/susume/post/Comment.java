@@ -10,9 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class Comment {
-    String content;
+    String commentContent;
     String username;
-    String userId;
     String postId;
     long createdAt;
 }

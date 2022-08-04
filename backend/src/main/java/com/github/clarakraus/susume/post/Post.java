@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Data
 @AllArgsConstructor
@@ -28,5 +29,22 @@ public class Post {
    private long createdAt;
    private long updatedAt;
    private List<Comment> comments = new ArrayList<>();
+
+
+   public void addToComments(Comment comment){
+      if(Objects.isNull(comment) || comment.getCommentContent().isBlank()){
+         throw new IllegalStateException();
+      }
+      comments.add(comment);
+   }
+   public void removeFromComments(Comment comment){
+      if(Objects.isNull(comment) || comment.getCommentContent().isBlank()){
+         throw new IllegalStateException();
+      }
+      comments.remove(comment);
+   }
+
+
+
 
 }

@@ -8,7 +8,7 @@ import {useNavigate} from "react-router-dom";
 
 export default function WatchlistPage(){
     const [savedSusumeList, setSavedSusumeList] = useState<Array<Susume>>([])
-    const susumeList = savedSusumeList.map(susume =><SusumeComponent addToSaveList={false} susume={susume} privateList={true} hasDeleteButton={true} isOnOwnBlolg={false}/>)
+    const susumeList = savedSusumeList.map(susume =><SusumeComponent addToSaveList={false} susume={susume} privateList={true} hasDeleteButton={true} isOnOwnBlog={false}/>)
     const nav = useNavigate();
 
    useEffect(() =>{

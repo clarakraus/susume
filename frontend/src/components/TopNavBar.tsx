@@ -17,7 +17,7 @@ export const TopNavBar = () => {
                 <Typography variant={"h6"} component={"div"} sx={{flexGrow: 1}} >
                 </Typography>
                 <Stack direction="row" spacing={2} >
-                    <Button color={"inherit"}>news</Button>
+                    <Button onClick={() =>nav("/newsfeed")} color={"inherit"}>news</Button>
                     <Button color={"inherit"}>notifications</Button>
                     <Button color={"inherit"}>settings</Button>
                     <Button onClick={logOut} color={"inherit"}>Log out</Button>

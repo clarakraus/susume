@@ -52,10 +52,9 @@ public class PostService {
         List<Post> postList = favoritesList.stream()
                 .map(this::findPostByPostId)
                 .toList();
-        List<Susume> savedSusumes = postList.stream()
+        return postList.stream()
                 .map(post -> susumeMapper.map(getMovieById(post.getId()), post))
                 .toList();
-        return savedSusumes;
     }
     public Susume getSusumeByPostId(String postId){
         Post post = findPostByPostId(postId);
@@ -86,4 +85,20 @@ public class PostService {
                     .toList();
         return postIdList.stream().map(this::getSusumeByPostId).toList();
     }
+
+
+    public void createComment(Comment comment, String username){
+        Comment newComment = new Comment();
+        newComment.setCommentContent(comment.getCommentContent());
+        newComment.setUsername(username);
+        newComment.setPostId(comment.getPostId());
+        newComment.setCreatedAt(System.currentTimeMillis());
+
+        Post post = findPostByPostId(comment.getPostId());
+
+        post.addToComments(newComment);
+
+        postRepo.save(post);
+    }
+
 }

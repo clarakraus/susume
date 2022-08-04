@@ -153,3 +153,15 @@ export function getSusumesForNewsFeed(){
     })
         .then((response:AxiosResponse<Susume[]>)=> response.data)
 }
+
+export function postComment(commentContent: string, postId: string){
+    axios.put(`/postings/comment`,{
+        commentContent,
+        postId
+    } , {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('jwt')}`
+        }
+    })
+
+}

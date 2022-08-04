@@ -27,9 +27,14 @@
     height: 100%;
 }
 .card-header img {
+    transition: height 0.5s;
     width: 100%;
     height: 200px;
     object-fit: cover;
+    object-position: top;
+}
+.card-header img:hover{
+  height: 600px;
 }
 .card-body {
     display: flex;
@@ -71,6 +76,9 @@
     display: flex;
     margin-top: auto;
 }
+.user .flipButton{
+    margin-left: 80px;
+}
 
 .user img {
     border-radius: 50%;
@@ -90,7 +98,7 @@
     height: 500px;
     font-weight: 200;
     /*background-color: #7FB5FF;*/
-    background-color: #DAE5D0;
+    background-color: rgb(234, 248, 252);
     border-radius: 8px;
     /*background: #8e9eab;  !* fallback for old browsers *!*/
     /*background: -webkit-linear-gradient(to top, #eef2f3, #8e9eab);  !* Chrome 10-25, Safari 5.1-6 *!*/
@@ -133,5 +141,21 @@
     width: 100%;
     text-align: left;
 }
+.alignComments{
+    overflow-y: auto;
+    height: 100px;
+}
+.backButtons{
+    text-align: center;
+    justify-content: center;
+}
+.commentField{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+
+}
+
+
 
 
