@@ -48,12 +48,12 @@ export default function SusumeComponent(props: SusumeGalleryProps) {
             .then(data => setProfilepicture(data.profilePicture))
             .then(() => setCommentArray(props.susume.comments))
 
-    }, [creator])
+    }, [creator, susumeId])
 
     const refreshComments = useCallback(() => {
         getSingleSusume(susumeId)
             .then(susume =>setCommentArray(susume.comments))
-    }, [])
+    }, [props.susume.comments])
 
     const commentItems = commentArray.map(comment =><CommentComponent key={comment.createdAt} userComment={comment} refreshComments={refreshComments} />)
 
