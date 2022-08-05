@@ -25,6 +25,7 @@
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
     width: 100%;
     height: 100%;
+    backface-visibility: hidden;
 }
 .card-header img {
     transition: height 0.5s;
@@ -110,7 +111,6 @@
     height: 100%;
     transition: transform 1s;
     transform-style: preserve-3d;
-    cursor: pointer;
     position: relative;
     background-color: #F6F6F6;
     border-radius: 8px;
@@ -133,10 +133,7 @@
 .card-back {
     transform: rotateY(180deg);
 }
-.inhibitFlip{
-    z-index: 3;
-    position: relative;
-}
+
 .descriptionParagraph{
     width: 100%;
     text-align: left;
@@ -146,14 +143,20 @@
     height: 100px;
 }
 .backButtons{
+    display: flex;
+    justify-content: space-around;
     text-align: center;
-    justify-content: center;
+    margin-bottom: 10px;
+
 }
 .commentField{
     display: flex;
     flex-direction: row;
     margin-bottom: 20px;
 
+}
+.is-flipped .flipButton{
+    display: none;
 }
 
 

@@ -2,7 +2,7 @@ import BlogComponent from "../components/BlogComponent";
 import {useNavigate, useParams} from "react-router-dom";
 import SusumeGallery from "../components/SusumeGallery";
 import {getFriendBlogDetails, sendFriendsList} from "../service/BlogService";
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {FriendItem} from "../service/Model";
 import FriendComponent from "../components/FriendComponent";
 import {BottomNavigation, BottomNavigationAction, Paper} from "@mui/material";
@@ -15,7 +15,7 @@ export default function FriendPage(){
     const [friendList, setFriendList] = useState<Array<FriendItem>>([])
     const nav = useNavigate()
 
-    useEffect( () =>{
+    const refreshFriendsBlog = useCallback(()=> {
         if(username){
             getFriendBlogDetails(username)
                 .then(data => {
@@ -23,7 +23,6 @@ export default function FriendPage(){
                     setProfileDescription(data.profileDescription!)
                     return data
                 })
-
                 .then((data) => {
                     sendFriendsList(data.friendsList!)
                         .then(data => setFriendList(data))
@@ -35,6 +34,11 @@ export default function FriendPage(){
                 })
         }
     }, [username, nav])
+
+    useEffect( () =>{
+        refreshFriendsBlog()
+    }, [refreshFriendsBlog])
+
     const ListOfFriends = friendList.map(friend => <FriendComponent friendItem={{username:friend.username, profilePicture:friend.profilePicture, blogId: friend.blogId}}/>)
 
 

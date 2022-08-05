@@ -5,6 +5,7 @@ import "./Commentcomponent.css"
 
 interface SusumeComponentProps{
     userComment: UserComment
+    refreshComments: () => void
 }
 
 export default function CommentComponent(props: SusumeComponentProps){
@@ -12,7 +13,7 @@ export default function CommentComponent(props: SusumeComponentProps){
     const username = props.userComment.username
     const content = props.userComment.commentContent
     const commentDate= props.userComment.createdAt
-    const postId= props.userComment.postId
+    //const susumePostId = props.userComment.postId
     const [profilePicture, setProfilepicture] = useState("")
 
     const date = new Date(commentDate)
@@ -21,7 +22,7 @@ export default function CommentComponent(props: SusumeComponentProps){
         getFriendBlogDetails(username)
             .then(data => setProfilepicture(data.profilePicture))
 
-    }, [])
+    }, [username])
 
 
     return(

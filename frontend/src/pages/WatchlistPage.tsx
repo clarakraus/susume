@@ -1,5 +1,5 @@
 import {getProfileDetails} from "../service/BlogService";
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {Susume} from "../service/Model";
 import SusumeComponent from "../components/SusumeComponent";
 import {BottomNavigation, BottomNavigationAction, Paper} from "@mui/material";
@@ -8,14 +8,19 @@ import {useNavigate} from "react-router-dom";
 
 export default function WatchlistPage(){
     const [savedSusumeList, setSavedSusumeList] = useState<Array<Susume>>([])
-    const susumeList = savedSusumeList.map(susume =><SusumeComponent addToSaveList={false} susume={susume} privateList={true} hasDeleteButton={true} isOnOwnBlog={false}/>)
-    const nav = useNavigate();
+   const nav = useNavigate();
+
+
+    const refreshSusumeWatchlist = useCallback(() => {
+            getProfileDetails()
+                .then(data => setSavedSusumeList(data.savedSusumes))
+    }, [])
 
    useEffect(() =>{
-       getProfileDetails()
-           .then(data => setSavedSusumeList(data.savedSusumes))
-   }, [])
+      refreshSusumeWatchlist()
+   }, [refreshSusumeWatchlist])
 
+    const susumeList = savedSusumeList.map(susume =><SusumeComponent addToSaveList={false} susume={susume} privateList={true} hasDeleteButton={true} isOnOwnBlog={false} refreshSusumes={refreshSusumeWatchlist}/>)
 
     return(
         <>
@@ -30,6 +35,7 @@ export default function WatchlistPage(){
                     <BottomNavigationAction label="blog" onClick={() => nav("/profile")}/>
                     <BottomNavigationAction label="Friends" />
                     <BottomNavigationAction label="Edit profile" onClick={() => nav("/profile/edit/blog")}/>
+
                 </BottomNavigation>
             </Paper>
         </>

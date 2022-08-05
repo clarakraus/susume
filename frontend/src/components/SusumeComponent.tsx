@@ -1,14 +1,21 @@
-import {Susume} from "../service/Model";
+import {Susume, UserComment} from "../service/Model";
 import "./SusumeComponent.css"
-import {addToSaveList, deletePosting, postComment, removeFromSaveList} from "../service/BlogService";
+import {
+    addToSaveList,
+    deletePosting,
+    getFriendBlogDetails, getSingleSusume,
+    postComment,
+    removeFromSaveList
+} from "../service/BlogService";
 import {useNavigate} from "react-router-dom";
-import {Button, CardActions, TextField} from "@mui/material";
-import React, {useEffect, useRef, useState} from "react";
+import {Button, TextField} from "@mui/material";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import CommentComponent from "./CommentComponent";
 
 interface SusumeGalleryProps {
     susume: Susume
     addToSaveList: boolean
+    refreshSusumes: () => void
     privateList: boolean
     hasDeleteButton: boolean
     isOnOwnBlog: boolean
@@ -23,19 +30,32 @@ export default function SusumeComponent(props: SusumeGalleryProps) {
     const genre = props.susume.genre
     const susumeId = props.susume.postId
     const creator = props.susume.creater
-    const commentArray = props.susume.comments
-
-    const commentItems = commentArray.map(comment =><CommentComponent key={comment.createdAt} userComment={comment} />)
+    const [commentArray, setCommentArray] = useState<Array<UserComment>>([])
 
     const [commentContent, setCommentContent] = useState("")
 
-
-
+    const [profilePicture, setProfilepicture] = useState("")
 
     const [cardElement, setCardElement] = useState({} as HTMLDivElement)
+
     const ref = useRef({} as HTMLDivElement);
 
     const nav = useNavigate()
+
+
+    useEffect(() =>{
+        getFriendBlogDetails(creator)
+            .then(data => setProfilepicture(data.profilePicture))
+            .then(() => setCommentArray(props.susume.comments))
+
+    }, [creator])
+
+    const refreshComments = useCallback(() => {
+        getSingleSusume(susumeId)
+            .then(susume =>setCommentArray(susume.comments))
+    }, [])
+
+    const commentItems = commentArray.map(comment =><CommentComponent key={comment.createdAt} userComment={comment} refreshComments={refreshComments} />)
 
     const saveSusume = () => {
         addToSaveList(susumeId)
@@ -43,10 +63,13 @@ export default function SusumeComponent(props: SusumeGalleryProps) {
     }
     const deleteSusume = () => {
         removeFromSaveList(susumeId)
+            .then(props.refreshSusumes)
+
 
     }
     const deleteSusumeOnProfile = () => {
         deletePosting(susumeId)
+            .then(props.refreshSusumes)
 
     }
     const editSusume = () => {
@@ -64,8 +87,11 @@ export default function SusumeComponent(props: SusumeGalleryProps) {
 
     function createComment(){
         postComment(commentContent, susumeId)
+            .then(() => {
+                refreshComments()
+                setCommentContent("")
+            })
     }
-
 
     return (
 
@@ -87,15 +113,15 @@ export default function SusumeComponent(props: SusumeGalleryProps) {
                                 </p>
                                 <div className="user">
                                     <img
-                                        src="https://yt3.ggpht.com/a/AGF-l7-0J1G0Ue0mcZMw-99kMeVuBmRxiPjyvIYONg=s900-c-k-c0xffffffff-no-rj-mo"
+                                        src={profilePicture}
                                         alt="user"/>
                                     <div className="user-info">
                                         <h5>July Dec</h5>
                                         <small>2h ago</small>
                                     </div>
-                                    <CardActions>
+                                    <div>
                                         <Button className={"flipButton"} onClick={flipCard} size="small">flip</Button>
-                                    </CardActions>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -109,7 +135,7 @@ export default function SusumeComponent(props: SusumeGalleryProps) {
                                     </h3>
                                     <div className="user">
                                         <img
-                                            src="https://yt3.ggpht.com/a/AGF-l7-0J1G0Ue0mcZMw-99kMeVuBmRxiPjyvIYONg=s900-c-k-c0xffffffff-no-rj-mo"
+                                            src={profilePicture}
                                             alt="user"/>
                                         {creator}
                                     </div>
@@ -119,24 +145,28 @@ export default function SusumeComponent(props: SusumeGalleryProps) {
                                     <div className={"commentField"}>
                                         <Button onClick={createComment}>post</Button>
                                         <TextField variant={"filled"} multiline rows={1} size={"small"} placeholder="comment"
-                                                   onChange={event => setCommentContent(event.target.value)}/>
+                                                   onChange={event => setCommentContent(event.target.value)} value={commentContent}/>
                                     </div>
                                     <div className={"alignComments"}>
                                         {commentItems}
                                     </div>
-                                    {props.addToSaveList && <CardActions>
-                                        <Button onClick={saveSusume} size="small">Add to watchlist</Button>
-                                    </CardActions>}
-                                    {props.hasDeleteButton && <CardActions>
-                                        <Button onClick={deleteSusume} size="small">Delete</Button>
-                                    </CardActions>}
-                                </div>
-                                {props.isOnOwnBlog && <CardActions className={"backButtons"}>
-                                    <Button onClick={deleteSusumeOnProfile} size="small">Delete</Button>
-                                    <Button  onClick={editSusume} size="small">Edit</Button>
-                                    <Button onClick={flipCard} size="small">Flip</Button>
-                                </CardActions>}
 
+                                </div>
+                                <div className={"backButtons"}>
+                                    {props.hasDeleteButton && <div>
+                                        <Button onClick={deleteSusume} size="small">Delete</Button>
+                                    </div>}
+                                    {props.addToSaveList && <div>
+                                        <Button onClick={saveSusume} size="small">Add to watchlist</Button>
+                                    </div>}
+                                    {props.isOnOwnBlog && <div>
+                                        <Button onClick={deleteSusumeOnProfile} size="small">Delete</Button>
+                                    </div>}
+                                    {props.isOnOwnBlog && <div>
+                                        <Button  onClick={editSusume} size="small">Edit</Button>
+                                    </div>}
+                                    <Button onClick={flipCard} size="small">Flip</Button>
+                                </div>
                         </div>
                     </div>
                 </div>
