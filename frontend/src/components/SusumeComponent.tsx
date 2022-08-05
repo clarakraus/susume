@@ -111,17 +111,17 @@ export default function SusumeComponent(props: SusumeGalleryProps) {
                                 <p>
                                     {overview}
                                 </p>
-                                <div className="user">
-                                    <img
-                                        src={profilePicture}
-                                        alt="user"/>
-                                    <div className="user-info">
-                                        <h5>July Dec</h5>
-                                        <small>2h ago</small>
-                                    </div>
-                                    <div>
-                                        <Button className={"flipButton"} onClick={flipCard} size="small">flip</Button>
-                                    </div>
+                            </div>
+                            <div className="user backButtons">
+                                <img
+                                    src={profilePicture}
+                                    alt="user"/>
+                                <div className="user-info">
+                                    <h5>July Dec</h5>
+                                    <small>2h ago</small>
+                                </div>
+                                <div>
+                                    <Button className={"flipButton"} onClick={flipCard} size="small">flip</Button>
                                 </div>
                             </div>
                         </div>

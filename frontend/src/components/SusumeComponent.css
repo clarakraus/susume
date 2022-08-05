@@ -22,10 +22,11 @@
 .card {
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.2);
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
+
 }
 .card-header img {
     transition: height 0.5s;
@@ -42,8 +43,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding: 20px;
+    padding: 20px 20px 0 20px;
     min-height: 250px;
+
 }
 
 .tag {
@@ -68,10 +70,11 @@
 
 .card-body p {
     font-size: 13px;
-    height: 5rem;
-    margin: 0 0 40px;
+    height: 6rem;
+    margin: 0 0 20px;
     overflow-y: auto;
     text-align: left;
+
 }
 .user {
     display: flex;
@@ -101,6 +104,7 @@
     /*background-color: #7FB5FF;*/
     background-color: rgb(234, 248, 252);
     border-radius: 8px;
+
     /*background: #8e9eab;  !* fallback for old browsers *!*/
     /*background: -webkit-linear-gradient(to top, #eef2f3, #8e9eab);  !* Chrome 10-25, Safari 5.1-6 *!*/
     /*background: linear-gradient(to top, #eef2f3, #8e9eab); !* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ *!*/
@@ -135,25 +139,29 @@
 }
 
 .descriptionParagraph{
+    margin-top: 10px;
+    border-radius: 8px;
     width: 100%;
     text-align: left;
+    background: rgba(229, 232, 232, 0.59);
 }
 .alignComments{
     overflow-y: auto;
-    height: 100px;
+    height: 130px;
+    width: 260px;
+    margin-bottom: 25px;
+
 }
 .backButtons{
     display: flex;
     justify-content: space-around;
     text-align: center;
-    margin-bottom: 10px;
-
+    margin-bottom: 30px;
 }
 .commentField{
     display: flex;
     flex-direction: row;
     margin-bottom: 20px;
-
 }
 .is-flipped .flipButton{
     display: none;
