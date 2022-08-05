@@ -18,6 +18,13 @@ public class BlogService{
     public Blog getUserById(String id){
         return blogRepo.findBlogByBlogId(id).orElseThrow();
     }
+
+    public void createPosting(Post post, String creator){
+       String creatorId = getBlogDetails(creator).getBlogId();
+       postService.createPost(post, creator, creatorId);
+
+    }
+
     public BlogDTO getBlogDetails(String username) {
         Blog blog = blogRepo.findBlogByUsername(username).orElseThrow();
         List <Susume> susumeList = blog.getSavedSusumes().stream().map(postService::getSusumeByPostId)
@@ -55,6 +62,11 @@ public class BlogService{
        Blog blogToEdit = blogRepo.findBlogByBlogId(blogId).orElseThrow();
        blogToEdit.changeBlogInfos(editBlogData, blogToEdit);
        blogRepo.save(blogToEdit);
+    }
+
+    public List<Susume> newsfeed(String username){
+        List<String> friendIds=  blogRepo.findBlogByUsername(username).get().getFriendsList();
+        return postService.getSusumesForNewsFeed(friendIds);
     }
 
 

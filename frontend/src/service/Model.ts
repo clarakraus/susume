@@ -30,6 +30,7 @@ export interface Susume{
     homage: string
     genre: string
     creater: string
+    comments: Array<UserComment>
 }
 
 export interface Content {
@@ -64,4 +65,10 @@ export interface EditBlogData {
 export interface EditPostData{
     homage: string
     genre: String
+}
+export interface UserComment{
+    commentContent: string
+    username: string
+    postId: string
+    createdAt: number
 }

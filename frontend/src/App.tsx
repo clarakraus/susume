@@ -9,8 +9,11 @@ import WatchlistPage from "./pages/WatchlistPage";
 import EditBlogPage from "./pages/EditBlogPage";
 import "./App.css"
 import EditSusumePage from "./pages/EditSusumePage";
+import NewsfeedPage from "./pages/NewsfeedPage";
 
 export default function App() {
+
+
     return (
         <BrowserRouter>
             <Routes>
@@ -22,6 +25,7 @@ export default function App() {
                 <Route path={"/profile/watchlist"} element={<WatchlistPage/>}/>
                 <Route path={"/profile/edit/blog"} element={<EditBlogPage/>}/>
                 <Route path={"/profile/edit/:susumeId"} element={<EditSusumePage/>}/>
+                <Route path={"/newsfeed"} element={<NewsfeedPage/>}/>
             </Routes>
         </BrowserRouter>
     )

@@ -1,6 +1,7 @@
 package com.github.clarakraus.susume.blog;
 
 
+import com.github.clarakraus.susume.post.Post;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +37,16 @@ public class BlogController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+
+    @PostMapping("/postings/movie/new")
+    public ResponseEntity<Void> postMovie(@RequestBody Post post, Principal principal) {
+        post.setCreater(principal.getName());
+        blogService.createPosting(post, principal.getName());
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+
+
     @GetMapping("/getfriendblog/{username}")
     public ResponseEntity<BlogDTO> getBlogDetails(@PathVariable String username) {
         try {
@@ -104,4 +115,12 @@ public class BlogController {
         blogService.editBlog(editBlogData, blogId);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
+
+    @GetMapping("/postings/newsfeed")
+    public ResponseEntity<List<Susume>> getSusumesForNewsFeed(Principal principal) {
+        return ResponseEntity.ok(blogService.newsfeed(principal.getName()));
+
+    }
+
+
 }

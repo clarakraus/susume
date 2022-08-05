@@ -1,12 +1,11 @@
 body{
-    background-color: #DAE5D0;
+    background-color: rgb(234, 248, 252);
     font-family: Geneva, sans-serif;
     color: #7e7b7b;
     text-align: center;
-    padding-left: 2rem;
 }
 h2{
     font-family: "Avenir Next", sans-serif;
     font-weight: bold;
-    color: #496457;
+    color: rgba(4, 28, 35, 0.59);
 }

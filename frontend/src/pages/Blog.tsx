@@ -91,7 +91,7 @@ export default function Blog(){
                 <MovieApiSearch/>
             </div>
             <div>
-                <SusumeGallery  addToSaveList={false} creatorName={username!} privateList={false} hasDeleteButton={false} shownOnOwnBlog={true} />
+                <SusumeGallery  addToSaveList={false} creatorName={username!} privateList={false} hasDeleteButton={false} shownOnOwnBlog={true}  />
             </div>
             <div>
                 <SearchFriends renderBlog={renderBlogComponent}/>
