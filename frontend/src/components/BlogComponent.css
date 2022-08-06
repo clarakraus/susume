@@ -1,0 +1,12 @@
+.blog{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    margin-bottom: 50px;
+
+}
+.blogDiv{
+    width: 15rem;
+    text-align: left;
+}

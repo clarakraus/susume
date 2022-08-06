@@ -6,6 +6,7 @@ import React, {useCallback, useEffect, useState} from "react";
 import {FriendItem} from "../service/Model";
 import FriendComponent from "../components/FriendComponent";
 import {BottomNavigation, BottomNavigationAction, Paper} from "@mui/material";
+import "./FriendPage.css"
 
 export default function FriendPage(){
 
@@ -44,24 +45,32 @@ export default function FriendPage(){
 
     return(
         <>
-            <div>
-                <BlogComponent username={username!} profileDescription={profileDescription}  profilePicture={profilePicture}/>
+            <div className={"blogOrganization"}>
+                <div >
+                    <div className={"blogInfo"}>
+                        <BlogComponent username={username!} profileDescription={profileDescription}  profilePicture={profilePicture}/>
+                    </div>
+                </div>
+                <hr/>
+                <div className={"friendAndSusumes"}>
+                    <div >
+                        {ListOfFriends}
+                    </div>
+                    <div>
+                        <SusumeGallery  addToSaveList={true} creatorName={username!} privateList={false} hasDeleteButton={false} shownOnOwnBlog={false} />
+                    </div>
+                </div>
+                <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+                    <BottomNavigation
+                        showLabels
+                    >
+                        <BottomNavigationAction label="blog" onClick={() => nav("/profile")}/>
+                        <BottomNavigationAction label="Friends" />
+                        <BottomNavigationAction label="Edit profile" onClick={() => nav("/profile/edit/blog")}/>
+                    </BottomNavigation>
+                </Paper>
             </div>
-            <div>
-                {ListOfFriends}
-            </div>
-            <div>
-                <SusumeGallery  addToSaveList={true} creatorName={username!} privateList={false} hasDeleteButton={false} shownOnOwnBlog={false} />
-            </div>
-            <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-                <BottomNavigation
-                    showLabels
-                >
-                    <BottomNavigationAction label="blog" onClick={() => nav("/profile")}/>
-                    <BottomNavigationAction label="Friends" />
-                    <BottomNavigationAction label="Edit profile" onClick={() => nav("/profile/edit/blog")}/>
-                </BottomNavigation>
-            </Paper>
+
         </>
     )
 }

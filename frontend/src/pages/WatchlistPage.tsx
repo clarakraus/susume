@@ -14,6 +14,11 @@ export default function WatchlistPage(){
     const refreshSusumeWatchlist = useCallback(() => {
             getProfileDetails()
                 .then(data => setSavedSusumeList(data.savedSusumes))
+                .catch((e) => {
+                    if(e.response.status === 403){
+                        nav("/")
+                    }
+                })
     }, [])
 
    useEffect(() =>{

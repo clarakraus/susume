@@ -11,6 +11,7 @@ import SearchFriends from "../components/SearchFriends";
 import FriendComponent from "../components/FriendComponent";
 import {BottomNavigation, BottomNavigationAction, Paper} from "@mui/material";
 import {TopNavBar} from "../components/TopNavBar";
+import Sidebar from "../components/Sidebar";
 
 
 
@@ -95,6 +96,9 @@ export default function Blog(){
             </div>
             <div>
                 <SearchFriends renderBlog={renderBlogComponent}/>
+            </div>
+            <div>
+                <Sidebar/>
             </div>
 
             <div>

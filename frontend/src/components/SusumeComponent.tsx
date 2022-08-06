@@ -139,9 +139,11 @@ export default function SusumeComponent(props: SusumeGalleryProps) {
                                             alt="user"/>
                                         {creator}
                                     </div>
-                                    <p className={"descriptionParagraph"}>
-                                        {homage}
-                                    </p>
+                                    <div className={"descriptionDiv"}>
+                                        <p className={"descriptionParagraph"}>
+                                            {homage}
+                                        </p>
+                                    </div>
                                     <div className={"commentField"}>
                                         <Button onClick={createComment}>post</Button>
                                         <TextField variant={"filled"} multiline rows={1} size={"small"} placeholder="comment"
