@@ -1,9 +1,14 @@
-import {AppBar, Button, Stack, Toolbar, Typography} from "@mui/material";
+import {AppBar, Avatar, Button, Stack, Toolbar, Typography} from "@mui/material";
 import {useNavigate} from "react-router-dom";
+import "./TopNavBar.css";
 
+interface BlogComponentProps{
+    blogName: string
+    profilePicture: string
+    profileDescription: string
+}
 
-
-export const TopNavBar = () => {
+export function TopNavBar(props: BlogComponentProps){
     const nav = useNavigate()
 
     const logOut = () => {
@@ -11,18 +16,23 @@ export const TopNavBar = () => {
         nav("/")
     }
     return(
-        <AppBar position={"static"} color="transparent">
+        <AppBar position={"static"} color="transparent" sx={{height: 160}}>
             <Toolbar>
-                susume
-                <Typography variant={"h6"} component={"div"} sx={{flexGrow: 1}} >
-                </Typography>
-                <Stack direction="row" spacing={2} >
-                    <Button onClick={() =>nav("/newsfeed")} color={"inherit"}>news</Button>
-                    <Button color={"inherit"}>notifications</Button>
-                    <Button color={"inherit"}>settings</Button>
-                    <Button onClick={logOut} color={"inherit"}>Log out</Button>
-                </Stack>
-
+                <div className={"barDetails"}>
+                    <Avatar src={props.profilePicture} alt="profile avatar" sx={{ width: 120, height: 120 }}/>
+                    <div className={"detailsDiv"}>
+                        <p>{props.blogName}</p>
+                        {props.profileDescription}
+                    </div>
+                </div>
+                <div className={"navbarButton"}>
+                    <Stack direction="row" spacing={2} >
+                        <Button onClick={() =>nav("/newsfeed")} color={"inherit"}>news</Button>
+                        <Button color={"inherit"}>notifications</Button>
+                        <Button color={"inherit"}>settings</Button>
+                        <Button onClick={logOut} color={"inherit"}>Log out</Button>
+                    </Stack>
+                </div>
             </Toolbar>
         </AppBar>
     )

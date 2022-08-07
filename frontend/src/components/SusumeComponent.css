@@ -1,8 +1,6 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-* {
-    box-sizing: border-box;
-}
+
 .divBody {
     display: flex;
     justify-content: center;
@@ -150,7 +148,7 @@
 .descriptionDiv{
     margin: 10px 0;
     width: 100%;
-    background: rgb(255, 252, 242);
+    background: rgba(187, 239, 245, 0.14);
     border-radius: 8px;
 
 }

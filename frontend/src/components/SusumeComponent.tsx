@@ -30,6 +30,10 @@ export default function SusumeComponent(props: SusumeGalleryProps) {
     const genre = props.susume.genre
     const susumeId = props.susume.postId
     const creator = props.susume.creater
+    const susumeDate = props.susume.createdAt
+
+    const date = new Date(susumeDate)
+
     const [commentArray, setCommentArray] = useState<Array<UserComment>>([])
 
     const [commentContent, setCommentContent] = useState("")
@@ -117,8 +121,8 @@ export default function SusumeComponent(props: SusumeGalleryProps) {
                                     src={profilePicture}
                                     alt="user"/>
                                 <div className="user-info">
-                                    <h5>July Dec</h5>
-                                    <small>2h ago</small>
+                                    <h5>{creator}</h5>
+                                    <small> {date.toLocaleDateString()}</small>
                                 </div>
                                 <div>
                                     <Button className={"flipButton"} onClick={flipCard} size="small">flip</Button>

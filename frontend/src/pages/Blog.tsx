@@ -1,17 +1,16 @@
 
-import BlogComponent from "../components/BlogComponent";
 import MovieApiSearch from "../components/MovieApiSearch";
 import SusumeGallery from "../components/SusumeGallery";
-import {NavLink, useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 import {getProfileDetails, sendFriendsList} from "../service/BlogService";
 import {useCallback, useEffect, useState} from "react";
 import {FriendItem} from "../service/Model";
 import SearchFriends from "../components/SearchFriends";
 import FriendComponent from "../components/FriendComponent";
-import {BottomNavigation, BottomNavigationAction, Paper} from "@mui/material";
 import {TopNavBar} from "../components/TopNavBar";
-import Sidebar from "../components/Sidebar";
+import "./AccordionMenu.css"
+import "./Blog.css"
 
 
 
@@ -20,6 +19,7 @@ export default function Blog(){
     const [profilePicture, setProfilePicture] = useState("")
     const [profileDescription, setProfileDescription] = useState("")
     const [friendList, setFriendList] = useState<Array<FriendItem>>([])
+    const [blogName, setBlogName] = useState("")
     const nav = useNavigate()
 
 
@@ -27,7 +27,7 @@ export default function Blog(){
         if (!username){
             getProfileDetails()
                 .then(data => {
-
+                    setBlogName(data.username)
                     setProfilePicture(data.profilePicture)
                     setProfileDescription(data.profileDescription!)
                     return data
@@ -48,20 +48,6 @@ export default function Blog(){
             nav(`/profile/${username}`)
         }
 
-
-          /*  getFriendBlogDetails(username!)
-                .then(data => {
-                    setProfilePicture(data.profilePicture)
-                    setProfileDescription(data.profileDescription!)
-                    return data
-                })
-                .then((data) => {
-                    sendFriendsList(data.friendsList!)
-                        .then(data => setFriendList(data))
-                })
-
-           */
-
     }, [username, nav])
 
 
@@ -78,41 +64,26 @@ export default function Blog(){
 
     return(
         <>
-            <div>
-                <TopNavBar/>
-            </div>
-            <div>
-                <BlogComponent username={username!} profilePicture={profilePicture} profileDescription={profileDescription} />
-            </div>
-            <NavLink to={"/profile/edit/blog"}><div>
-                <button>edit profile</button>
-            </div>
-            </NavLink>
-            <div>
-                <MovieApiSearch/>
-            </div>
-            <div>
-                <SusumeGallery  addToSaveList={false} creatorName={username!} privateList={false} hasDeleteButton={false} shownOnOwnBlog={true}  />
-            </div>
-            <div>
-                <SearchFriends renderBlog={renderBlogComponent}/>
-            </div>
-            <div>
-                <Sidebar/>
+            <TopNavBar profilePicture={profilePicture} blogName={blogName} profileDescription={profileDescription}/>
+            <div className="container">
+                <nav className="menu">
+                    <div className={"friendBar"}>
+                        <SearchFriends renderBlog={renderBlogComponent}/>
+                        <div>
+                            {ListOfFriends}
+                        </div>
+                    </div>
+                </nav>
+                <main className={"blogMain"}>
+                    <div className={"susumeGallery"}>
+                        <MovieApiSearch/>
+                        <SusumeGallery  addToSaveList={false} creatorName={username!} privateList={false} hasDeleteButton={false} shownOnOwnBlog={true}  />
+                    </div>
+                </main>
             </div>
 
-            <div>
-                {ListOfFriends}
-            </div>
-            <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-                <BottomNavigation
-                    showLabels
-                >
-                    <BottomNavigationAction label="Watchlist" onClick={() => nav("/profile/watchlist")}/>
-                    <BottomNavigationAction label="Friends" />
-                    <BottomNavigationAction label="Edit profile" onClick={() => nav("/profile/edit/blog")}/>
-                </BottomNavigation>
-            </Paper>
+
+
         </>
     )
 
