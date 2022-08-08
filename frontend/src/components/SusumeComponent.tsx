@@ -40,8 +40,6 @@ export default function SusumeComponent(props: SusumeGalleryProps) {
 
     const [profilePicture, setProfilepicture] = useState("")
 
-    const [cardElement, setCardElement] = useState({} as HTMLDivElement)
-
     const ref = useRef({} as HTMLDivElement);
 
     const nav = useNavigate()
@@ -82,12 +80,8 @@ export default function SusumeComponent(props: SusumeGalleryProps) {
     }
 
     function flipCard() {
-        cardElement.classList.toggle("is-flipped")
+        ref.current.classList.toggle("is-flipped")
     }
-
-    useEffect(() => {
-        setCardElement(ref.current)
-    }, [])
 
     function createComment(){
         postComment(commentContent, susumeId)

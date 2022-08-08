@@ -1,4 +1,4 @@
-import {AppBar, Avatar, Button, Stack, Toolbar, Typography} from "@mui/material";
+import {AppBar, Avatar, Button, Stack, Toolbar} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import "./TopNavBar.css";
 
@@ -28,8 +28,7 @@ export function TopNavBar(props: BlogComponentProps){
                 <div className={"navbarButton"}>
                     <Stack direction="row" spacing={2} >
                         <Button onClick={() =>nav("/newsfeed")} color={"inherit"}>news</Button>
-                        <Button color={"inherit"}>notifications</Button>
-                        <Button color={"inherit"}>settings</Button>
+                        <Button onClick={() =>nav("/profile/edit/blog")} color={"inherit"}>Edit Profile</Button>
                         <Button onClick={logOut} color={"inherit"}>Log out</Button>
                     </Stack>
                 </div>

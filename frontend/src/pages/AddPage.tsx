@@ -2,6 +2,8 @@ import {useNavigate, useParams} from "react-router-dom";
 import {postMovieToDB, searchTMDBForID} from "../service/BlogService";
 import React, {useEffect, useState} from "react";
 import {MoviePreview} from "../service/Model";
+import "./AddPage.css"
+import {TextField} from "@mui/material";
 
 export default function AddPage(){
     const {movieId} = useParams()
@@ -43,15 +45,19 @@ export default function AddPage(){
     return(
         <>
             {errorMessage && <div>{errorMessage}</div>}
-            <div>
-                <p> {movieToAdd.original_title} </p>
-                <p> {movieToAdd.overview} </p>
-                <img src={`https://image.tmdb.org/t/p/original/${movieToAdd.poster_path}`} width={120}
-                     alt="movie poster"/>
-                <p> {movieToAdd.release_date} </p>
+            <div className={"movieInfoAddPage"}>
+                <div className={"poster"}>
+                    <img src={`https://image.tmdb.org/t/p/original/${movieToAdd.poster_path}`} width={200}
+                         alt="movie poster"/>
+                </div>
+                <div className={"desc"}>
+                    <h2> {movieToAdd.original_title} </h2>
+                    <p> {movieToAdd.overview} </p>
+                    <p> {movieToAdd.release_date} </p>
+                </div>
             </div>
             <div>
-                <textarea placeholder={"tell your friends why you love this movie"} onChange={event => setHomage( event.target.value)}/>
+                <TextField rows={6}  placeholder={"tell your friends why you love this movie"} onChange={event => setHomage( event.target.value)}/>
             </div>
             <div>
                 <label>You decide the genre</label>

@@ -5,6 +5,7 @@ import {useNavigate} from "react-router-dom";
 import "../components/NewsfeedSusumeComponent.css"
 import NewsfeedSusumeComponent from "../components/NewsfeedSusumeComponent";
 import "./NewsfeedPage.css"
+import {BottomNavigation, BottomNavigationAction, Paper} from "@mui/material";
 
 export default function NewsfeedPage(){
     const nav = useNavigate()
@@ -20,19 +21,34 @@ export default function NewsfeedPage(){
             })
     }, [nav])
 
+    const logOut = () => {
+        localStorage.removeItem("jwt")
+        nav("/")}
 
-    useEffect(() =>{
-        refreshSusumes()
-    }, [refreshSusumes])
+        useEffect(() => {
+            refreshSusumes()
+        }, [refreshSusumes])
 
-    const susumelist2= susumeArray.map(susume =><NewsfeedSusumeComponent key={susume.postId} susume={susume} refreshSusume={refreshSusumes}/>)
+        const susumelist2 = susumeArray.map(susume => <NewsfeedSusumeComponent key={susume.postId} susume={susume}
+                                                                               refreshSusume={refreshSusumes}/>)
 
-    return(
-        <>
-            <div className={"newsfeedDiv"}>
-                {susumelist2}
-            </div>
-        </>
-    )
+        return (
+            <>
+                <div className={"newsfeedDiv"}>
+                    {susumelist2}
+                </div>
+                <Paper sx={{position: 'fixed', bottom: 0, left: 0, right: 0}} elevation={3}>
+                    <BottomNavigation
+                        showLabels
+                    >
+                        <BottomNavigationAction label="Blog" onClick={() => nav("/profile")}/>
+                        <BottomNavigationAction label="Watchlist" onClick={() => nav("/profile/watchlist")}/>
+                        <BottomNavigationAction label="Log out" onClick={logOut}/>
+
+
+                    </BottomNavigation>
+                </Paper>
+            </>
+        )
 
 }

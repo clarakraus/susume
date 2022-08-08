@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {editBlog, getProfileDetails} from "../service/BlogService";
 import {useNavigate} from "react-router-dom";
+import {Button} from "@mui/material";
 
 export default function EditBlogPage(){
     const [profileDescription, setDescription] = useState("")
@@ -33,7 +34,8 @@ export default function EditBlogPage(){
                 } value={profilePicture} onChange={event => setPicture(event.target.value)}/>
             </div>
             <div>
-                <button onClick={saveChanges}>save changes</button>
+                <Button onClick={saveChanges}>save changes</Button>
+                <Button onClick={() =>nav("/profile")} color={"inherit"}>Go Back</Button>
             </div>
         </>
     )

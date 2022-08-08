@@ -1,0 +1,19 @@
+.movieInfoAddPage{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 7rem;
+    gap: 2rem;
+    height: 27rem;
+}
+.desc{
+    width: 25rem;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    height: 22rem;
+
+}
+.poster{
+    height: 120%
+}

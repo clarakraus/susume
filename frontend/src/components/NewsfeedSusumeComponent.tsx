@@ -1,9 +1,8 @@
-import React, {useCallback, useEffect, useRef, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {Susume, UserComment} from "../service/Model";
 import {useNavigate} from "react-router-dom";
 import {
     addToSaveList,
-    deletePosting,
     getFriendBlogDetails,
     getSingleSusume, postComment,
 } from "../service/BlogService";
@@ -20,7 +19,6 @@ interface NewsfeedProps {
 
 export default function NewsfeedSusumeComponent(props:NewsfeedProps){
 
-        const category = props.susume.category
         const title = props.susume.content.title
         const picture = props.susume.content.poster_path
         const overview = props.susume.content.overview
@@ -54,12 +52,6 @@ export default function NewsfeedSusumeComponent(props:NewsfeedProps){
         const saveSusume = () => {
             addToSaveList(susumeId)
                 .then(() => nav("/profile/watchlist"))
-        }
-
-        const deleteSusumeOnProfile = () => {
-            deletePosting(susumeId)
-                .then(props.refreshSusume)
-
         }
 
 
