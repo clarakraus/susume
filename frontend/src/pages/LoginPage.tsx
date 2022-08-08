@@ -29,7 +29,7 @@ export default function LoginPage(){
 
     return (
         <div className={"formwrapper"}>
-            <img src={process.env.PUBLIC_URL + '/logo.png'} width={"120px"} />
+            <img src={process.env.PUBLIC_URL + '/logo.png'} width={"120px"}  alt={"Logo"}/>
             <h2>Login</h2>
                 <form onSubmit={login}>
                     <div>
