@@ -4,6 +4,7 @@ import {Susume} from "../service/Model";
 import SusumeComponent from "../components/SusumeComponent";
 import {BottomNavigation, BottomNavigationAction, Paper} from "@mui/material";
 import {useNavigate} from "react-router-dom";
+import "./WatchlistPage.css"
 
 
 export default function WatchlistPage(){
@@ -14,7 +15,12 @@ export default function WatchlistPage(){
     const refreshSusumeWatchlist = useCallback(() => {
             getProfileDetails()
                 .then(data => setSavedSusumeList(data.savedSusumes))
-    }, [])
+                .catch((e) => {
+                    if(e.response.status === 403){
+                        nav("/")
+                    }
+                })
+    }, [nav])
 
    useEffect(() =>{
       refreshSusumeWatchlist()
@@ -25,7 +31,7 @@ export default function WatchlistPage(){
     return(
         <>
             <h2>Watchlist</h2>
-            <div>
+            <div className={"watchlist"}>
                 {susumeList}
             </div>
             <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
@@ -34,7 +40,7 @@ export default function WatchlistPage(){
                 >
                     <BottomNavigationAction label="blog" onClick={() => nav("/profile")}/>
                     <BottomNavigationAction label="Friends" />
-                    <BottomNavigationAction label="Edit profile" onClick={() => nav("/profile/edit/blog")}/>
+                    <BottomNavigationAction label="News" onClick={() => nav("/newsfeed")}/>
 
                 </BottomNavigation>
             </Paper>

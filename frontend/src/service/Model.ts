@@ -31,6 +31,7 @@ export interface Susume{
     genre: string
     creater: string
     comments: Array<UserComment>
+    createdAt: number
 }
 
 export interface Content {

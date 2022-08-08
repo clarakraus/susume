@@ -30,13 +30,15 @@ export default function SusumeComponent(props: SusumeGalleryProps) {
     const genre = props.susume.genre
     const susumeId = props.susume.postId
     const creator = props.susume.creater
+    const susumeDate = props.susume.createdAt
+
+    const date = new Date(susumeDate)
+
     const [commentArray, setCommentArray] = useState<Array<UserComment>>([])
 
     const [commentContent, setCommentContent] = useState("")
 
     const [profilePicture, setProfilepicture] = useState("")
-
-    const [cardElement, setCardElement] = useState({} as HTMLDivElement)
 
     const ref = useRef({} as HTMLDivElement);
 
@@ -78,12 +80,8 @@ export default function SusumeComponent(props: SusumeGalleryProps) {
     }
 
     function flipCard() {
-        cardElement.classList.toggle("is-flipped")
+        ref.current.classList.toggle("is-flipped")
     }
-
-    useEffect(() => {
-        setCardElement(ref.current)
-    }, [])
 
     function createComment(){
         postComment(commentContent, susumeId)
@@ -111,17 +109,17 @@ export default function SusumeComponent(props: SusumeGalleryProps) {
                                 <p>
                                     {overview}
                                 </p>
-                                <div className="user">
-                                    <img
-                                        src={profilePicture}
-                                        alt="user"/>
-                                    <div className="user-info">
-                                        <h5>July Dec</h5>
-                                        <small>2h ago</small>
-                                    </div>
-                                    <div>
-                                        <Button className={"flipButton"} onClick={flipCard} size="small">flip</Button>
-                                    </div>
+                            </div>
+                            <div className="user backButtons">
+                                <img
+                                    src={profilePicture}
+                                    alt="user"/>
+                                <div className="user-info">
+                                    <h5>{creator}</h5>
+                                    <small> {date.toLocaleDateString()}</small>
+                                </div>
+                                <div>
+                                    <Button className={"flipButton"} onClick={flipCard} size="small">flip</Button>
                                 </div>
                             </div>
                         </div>
@@ -139,9 +137,11 @@ export default function SusumeComponent(props: SusumeGalleryProps) {
                                             alt="user"/>
                                         {creator}
                                     </div>
-                                    <p className={"descriptionParagraph"}>
-                                        {homage}
-                                    </p>
+                                    <div className={"descriptionDiv"}>
+                                        <p className={"descriptionParagraph"}>
+                                            {homage}
+                                        </p>
+                                    </div>
                                     <div className={"commentField"}>
                                         <Button onClick={createComment}>post</Button>
                                         <TextField variant={"filled"} multiline rows={1} size={"small"} placeholder="comment"

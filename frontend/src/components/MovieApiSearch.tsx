@@ -3,6 +3,7 @@ import {searchTMDB} from "../service/BlogService";
 import {MoviePreview} from "../service/Model";
 import MovieField from "./MovieField";
 import "./MovieApiSearch.css";
+import {Button, TextField} from "@mui/material";
 
 
 export default function MovieApiSearch(){
@@ -20,8 +21,8 @@ export default function MovieApiSearch(){
     return(
         <div>
             <form onSubmit={event => searchMovieApi(event)}>
-                <input type="text" placeholder="Movie-Title" value={movieTitle} onChange={ev => setMovieTitle(ev.target.value)}/>
-                <button type="submit">search</button>
+                <TextField size="small" type="text" placeholder="Movie-Title" value={movieTitle} onChange={ev => setMovieTitle(ev.target.value)}/>
+                <Button color={"inherit"} type="submit">search</Button>
             </form>
             <div className="movie-list">
                 {movieList}

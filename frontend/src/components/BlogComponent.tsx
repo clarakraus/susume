@@ -1,4 +1,5 @@
 import {Avatar} from "@mui/material";
+import "./BlogComponent.css"
 
 interface BlogProps{
     username: string
@@ -13,31 +14,21 @@ export default function BlogComponent(props: BlogProps){
     const picture = props.profilePicture
     const description = props.profileDescription
 
-  //  const friendlist = props.friendsList
- //   const [errorCode, setErrorCode] = useState("")
-
-
-
-   /* useEffect(() =>{
-        if(friendList.length > 0){
-            sendFriendsList(friendsArray)
-                .then(data => setFriendList(data))
-
-        }
-
-    }, [friendList])
-
-    */
     return(
         <>
-            <div>
-                {username}
-            </div>
-            <div>
-                {description}
-            </div>
-            <div>
-                <Avatar src={picture} alt="profile avatar" sx={{ width: 150, height: 150 }}/>
+            <div className={"blog"} >
+                <div className={"blogDiv"}>
+                    <Avatar src={picture} alt="profile avatar" sx={{ width: 150, height: 150 }}/>
+                </div>
+
+                    <div>
+                        <h3 className={"blogDiv"}>
+                            {username}
+                        </h3>
+                        <div className={"blogDiv"}>
+                            {description}
+                        </div>
+                    </div>
             </div>
 
         </>

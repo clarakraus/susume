@@ -1,6 +1,8 @@
 .susumeAlign{
+    margin-top: 70px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    gap: 50px;
 }
