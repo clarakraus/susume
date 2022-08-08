@@ -27,7 +27,8 @@ export function TopNavBar(props: BlogComponentProps){
                 </div>
                 <div className={"navbarButton"}>
                     <Stack direction="row" spacing={2} >
-                        <Button onClick={() =>nav("/newsfeed")} color={"inherit"}>news</Button>
+                        <Button onClick={() =>nav("/newsfeed")} color={"inherit"}>News</Button>
+                        <Button onClick={() =>nav("/profile/watchlist")} color={"inherit"}>Watchlist</Button>
                         <Button onClick={() =>nav("/profile/edit/blog")} color={"inherit"}>Edit Profile</Button>
                         <Button onClick={logOut} color={"inherit"}>Log out</Button>
                     </Stack>
