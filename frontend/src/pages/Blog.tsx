@@ -66,7 +66,7 @@ export default function Blog(){
 
     return(
         <>
-            <TopNavBar profilePicture={profilePicture} blogName={blogName} profileDescription={profileDescription}/>
+            <TopNavBar/>
             <div className="container">
                 <nav className="menu">
                     <div className={"friendBar"}>

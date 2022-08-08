@@ -1,14 +1,9 @@
-import {AppBar, Avatar, Button, Stack, Toolbar} from "@mui/material";
+import {AppBar, Button, Stack, Toolbar} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import "./TopNavBar.css";
 
-interface BlogComponentProps{
-    blogName: string
-    profilePicture: string
-    profileDescription: string
-}
 
-export function TopNavBar(props: BlogComponentProps){
+export function TopNavBar(){
     const nav = useNavigate()
 
     const logOut = () => {
@@ -19,7 +14,7 @@ export function TopNavBar(props: BlogComponentProps){
         <AppBar position={"static"} color="transparent" sx={{height: 160}}>
             <Toolbar>
                 <div className={"barDetails"}>
-                    <img src={process.env.PUBLIC_URL + '/logo.png'} width={"70px"} />
+                    <img src={process.env.PUBLIC_URL + '/logo.png'} width={"70px"}  alt={"logo"}/>
                 </div>
                 <div className={"navbarButton"}>
                     <Stack direction="row" spacing={2} >
