@@ -1,3 +1,13 @@
+.addContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
 .movieInfoAddPage{
     display: flex;
     flex-direction: row;
@@ -12,8 +22,15 @@
     flex-direction: column;
     overflow-y: auto;
     height: 22rem;
+    text-align: left;
 
 }
 .poster{
-    height: 120%
+    height: 100%
+}
+.dropdown{
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+    width: 300px;
 }

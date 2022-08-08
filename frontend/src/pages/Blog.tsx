@@ -11,6 +11,8 @@ import FriendComponent from "../components/FriendComponent";
 import {TopNavBar} from "../components/TopNavBar";
 import "./AccordionMenu.css"
 import "./Blog.css"
+import {Avatar} from "@mui/material";
+
 
 
 
@@ -68,8 +70,16 @@ export default function Blog(){
             <div className="container">
                 <nav className="menu">
                     <div className={"friendBar"}>
-                        <SearchFriends renderBlog={renderBlogComponent}/>
-                        <div>
+                        <div className={"detailsDiv"}>
+                            <Avatar src={profilePicture} alt="profile avatar" sx={{ width: 100, height: 100 }}/>
+                            <p>{blogName}</p>
+                        </div>
+                        <div className={"detailsDiv"}>
+                            {profileDescription}
+                        </div>
+                        <hr/>
+                        <div className={"friendSection"}>
+                            <SearchFriends renderBlog={renderBlogComponent}/>
                             {ListOfFriends}
                         </div>
                     </div>

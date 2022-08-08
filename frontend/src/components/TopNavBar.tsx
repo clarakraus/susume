@@ -19,11 +19,7 @@ export function TopNavBar(props: BlogComponentProps){
         <AppBar position={"static"} color="transparent" sx={{height: 160}}>
             <Toolbar>
                 <div className={"barDetails"}>
-                    <Avatar src={props.profilePicture} alt="profile avatar" sx={{ width: 120, height: 120 }}/>
-                    <div className={"detailsDiv"}>
-                        <p>{props.blogName}</p>
-                        {props.profileDescription}
-                    </div>
+                    <img src={process.env.PUBLIC_URL + '/logo.png'} width={"70px"} />
                 </div>
                 <div className={"navbarButton"}>
                     <Stack direction="row" spacing={2} >
