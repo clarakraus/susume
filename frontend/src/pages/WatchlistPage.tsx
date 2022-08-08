@@ -20,7 +20,7 @@ export default function WatchlistPage(){
                         nav("/")
                     }
                 })
-    }, [])
+    }, [nav])
 
    useEffect(() =>{
       refreshSusumeWatchlist()
