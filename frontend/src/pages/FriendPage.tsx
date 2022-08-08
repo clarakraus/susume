@@ -64,9 +64,9 @@ export default function FriendPage(){
                     <BottomNavigation
                         showLabels
                     >
-                        <BottomNavigationAction label="blog" onClick={() => nav("/profile")}/>
-                        <BottomNavigationAction label="Friends" />
-                        <BottomNavigationAction label="Edit profile" onClick={() => nav("/profile/edit/blog")}/>
+                        <BottomNavigationAction label="Blog" onClick={() => nav("/profile")}/>
+                        <BottomNavigationAction label="News"  onClick={() =>nav("/newsfeed")}/>
+                        <BottomNavigationAction label="Watchlist" onClick={() => nav("/profile/watchlist")}/>
                     </BottomNavigation>
                 </Paper>
             </div>

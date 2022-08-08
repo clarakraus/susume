@@ -28,6 +28,5 @@ export default function MovieApiSearch(){
                 {movieList}
             </div>
         </div>
-
     )
 }
