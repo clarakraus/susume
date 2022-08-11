@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from "react";
 import {Susume, UserComment} from "../service/Model";
-import {useNavigate} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {
     addToSaveList,
     getFriendBlogDetails,
@@ -76,10 +76,11 @@ export default function NewsfeedSusumeComponent(props:NewsfeedProps){
                         </div>
                         <div className="course-info">
                             <div className={"homageHeader"}>
-                                <a href={`/profile/${creator}`}>
+                                <NavLink to={`/profile/${creator}`} >
                                     <div>
                                         <Avatar src={profilePicture}/>
-                                    </div></a>
+                                    </div>
+                                </NavLink>
                                 {{homage} && <p>{creator}: "{homage}"</p>}
                             </div>
 
